@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title></title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+
+        <link rel="stylesheet" type="text/css" href="/yui/reset/reset-min.css" />
+        <link rel="stylesheet" type="text/css" href="/yui/fonts/fonts-min.css" />
+        <link rel="stylesheet" type="text/css" href="/yui/tabview/assets/skins/sam/tabview.css" />
+        <link rel="stylesheet" type="text/css" href="/yui/button/assets/skins/sam/button.css" />
+        <link rel="stylesheet" type="text/css" href="/yui/menu/assets/skins/sam/menu.css" />
+
+        <link rel="stylesheet" type="text/css" href="/css/screen.css" />
+
+        <script type="text/javascript" src="/yui/utilities/utilities.js"></script>
+        <script type="text/javascript" src="/yui/tabview/tabview-min.js"></script>
+        <script type="text/javascript" src="/yui/container/container-min.js"></script>
+        <script type="text/javascript" src="/yui/menu/menu-min.js"></script>
+        <script type="text/javascript" src="/yui/button/button-min.js"></script>
+        <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="/ckfinder/ckfinder.js"></script>
+
+        <script type="text/javascript" src="/js/buttons.js"></script>
+        <script type="text/javascript" src="/js/general.js"></script>
+        <script type="text/javascript" src="/js/dynamic_tables.js"></script>
+        <script type="text/javascript" src="/js/calendar.js"></script>
+        <script type="text/javascript" src="/js/item_builder.js"></script>
+    </head>
+
+    <body class="yui-skin-sam" onLoad="<?php if ($this->preview) : ?>open_preview('<?php echo $this->url('content', ['slug' => $this->itemName], ['query' => ['preview' => 'content']]); ?>')<?php endif; ?>">
+
+        <div id="top"><!-- Start top area -->
+
+            <div class="title">Edit<?php echo ($this->titleSuffix) ? ' ' . $this->escapeHtml(strtolower($this->titleSuffix)) : '' ?>:
+            <?php echo $this->escapeHtml($this->typeName) ?> - <i><?php echo $this->escapeHtml($this->itemName) ?></i></div>
+            <?php echo $this->messages() ?>
+            <div class="info"><img src="/images/required_star.png" alt="Required"> indicates required field</div>
+
+        </div><!-- End top area -->
+
+        <?php
+        $form = $this->form;
+        $form->setAttribute('name', 'main')->prepare();
+        ?>
+
+        <?php echo $this->form()->openTag($form) ?>
+
+            <?php echo $this->adminFormElement($form->get('from')) ?>
+            <?php echo $this->adminFormElement($form->get('id')) ?>
+            <?php echo $this->adminFormElement($form->get('partial')) ?>
+            <?php echo $this->adminFormElement($form->get('token')) ?>
+
+            <div id="stage"><!-- Start stage area -->
+
+                <div class="white-box"><!-- Start fieldset -->
+                    <div class="white-box-rounded-corner-top"><div></div></div>
+                    <div class="white-box-content">
+                        <div class="white-box-title">Notes</div>
+                        <p>
+                            <?php if (empty($this->itemNotes)) : ?>
+                            No notes found
+                            <?php else : ?>
+                            <?php foreach ($this->itemNotes as $note) : ?>
+                            <?php echo $this->date($note->time, 'F j Y H:i') . ' - ' .
+                            $this->escapeHtml($note->username) . ' - ' .
+                            $this->escapeHtml($note->text) ?><br />
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                        </p>
+                    </div>
+                </div><!-- End fieldset -->
+
+                <div class="white-box"><!-- Start fieldset -->
+                    <div class="white-box-rounded-corner-top"><div></div></div>
+                    <div class="white-box-content">
+                        <div class="white-box-title">Content</div>
+
+                            <?php echo $this->adminFormElement($form->get('navText')) ?>
+
+                            <?php if ($this->enableMetaFields) : ?>
+                            <?php echo $this->adminFormElement($form->get('metaKeywords')) ?>
+                            <?php echo $this->adminFormElement($form->get('metaDescription')) ?>
+                            <?php endif; ?>
+
+                            <?php echo $this->adminFormElement($form->get('title')) ?>
+
+                            <?php if ($form->has('fields')) : ?>
+                            <?php foreach ($form->get('fields')->getElements() as $element) : ?>
+                            <?php echo $this->adminFormElement($element) ?>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+
+                            <?php if ($this->multipleParts) : ?>
+                            <div id="ib_container" class="ib-container yui-navset">
+
+                                <p>Number of parts <select class="ib-add-part-select">
+                                        <option value="0" selected="selected">0</option>
+                                        <?php for ($i = 1; $i <= 10; $i++) : ?>
+                                        <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                                        <?php endfor; ?>
+                                    </select></p>
+
+                                <ul id="ib_list" class="ib-draglist yui-nav">
+                                    <?php foreach ($form->get('parts')->getFieldsets() as $key => $part) : ?>
+                                    <li id="ib_list_item<?php echo $key ?>" class="ib-draglist-item<?php if ($form->get('selectedPart')->getValue() == $key) : ?> selected<?php endif; ?>"<?php if ($part->get('delete')->getValue()) : ?> style="display: none;"<?php endif; ?>><a href="#tab<?php echo $key; ?>"><em>&nbsp;</em></a></li>
+                                    <?php endforeach; ?>
+                                </ul>
+
+                                <?php echo $this->formHidden($form->get('selectedPart')->setAttribute('id', 'selected-part')); ?>
+
+                                <div class="yui-content">
+                             <?php endif; ?>
+
+                                    <?php foreach ($form->get('parts')->getFieldsets() as $key => $part) : ?>
+                                    <div id="ib_part<?php echo $key ?>" class="ib-part">
+
+                                        <?php if ($this->multipleParts) : ?>
+                                        <?php echo $this->formHidden($part->get('orderBy')) ?>
+                                        <img class="ib-delete-part-icon" src="/images/icons/dustbin.png" alt="Dustbin icon" title="Delete part" />
+                                        <?php echo $this->formHidden($part->get('delete')) ?>
+                                        <?php endif; ?>
+
+                                        <?php $count = 0; foreach ($part->getElements() as $element) : ?>
+                                        <?php if ($element->getName() !== 'orderBy' && $element->getName() !== 'delete') : ?>
+                                        <?php echo $this->adminFormElement($element) ?>
+                                        <?php endif; ?>
+                                        <?php $count++; endforeach; ?>
+
+                                    </div>
+                                    <?php endforeach; ?>
+
+                            <?php if ($this->multipleParts) : ?>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+
+                    </div><!-- End fieldset -->
+                </div><!-- End stage area -->
+
+                <div class="submit-area">
+
+                    <div class="form-element">
+                        <div class="form-inputs line-up">
+                            <?php if (count($form->get('previewTemplateId')->getValueOptions()) > 0) : ?>
+                            <?php
+                            $form->get('preview')->setAttribute('class', 'menu-button');
+                            echo $this->formElement($form->get('preview'));
+                            echo $this->formElement($form->get('previewTemplateId'));
+                            ?>
+                            <?php else : ?>
+                            <?php
+                            $form->get('preview')->setAttribute('class', 'button');
+                            echo $this->formElement($form->get('preview'));
+                            ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <?php echo $this->adminFormElement($form->get('note')) ?>
+
+                    <div class="form-element">
+                        <div class="form-inputs line-up">
+                            <?php
+                            $form->get('save')->setAttribute('class', 'button');
+                            echo $this->formElement($form->get('save'));
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="form-element">
+                        <div class="form-inputs line-up">
+                            <?php
+                            $form->get('publish')->setAttribute('class', 'button');
+                            echo $this->formElement($form->get('publish'));
+                            ?>
+                        </div>
+                    </div>
+
+                </div>
+
+        <?php echo $this->form()->closeTag() ?>
+
+    </body>
+</html>
