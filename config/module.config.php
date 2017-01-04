@@ -10,6 +10,7 @@ use Account\Model\User;
 use Core\Model\ProvisionalLocation;
 use Zend\ServiceManager\Factory\InvokableFactory;
 use Block\Model\Block;
+use Zend\Permissions\Acl\Acl;
 
 return [
     'item' => [
@@ -33,6 +34,40 @@ return [
                 ],
             ],
             // LIFO
+        ],
+    ],
+    'acl' => [
+        'resources' => [
+            [
+                'id' => Controller\ItemController::class,
+            ],
+        ],
+        'rules' => [
+            [
+                'type' => Acl::TYPE_ALLOW,
+                'roles' => 'guest',
+                'resources' => Controller\ItemController::class,
+                'privileges' => 'view',
+            ],
+            [
+                'type' => Acl::TYPE_ALLOW,
+                'roles' => 'author',
+                'resources' => Controller\ItemController::class,
+                'privileges' => [
+                    'create',
+                    'edit',
+                ],
+            ],
+            [
+                'type' => Acl::TYPE_ALLOW,
+                'roles' => 'publisher',
+                'resources' => Controller\ItemController::class,
+                'privileges' => [
+                    'publish',
+                    'delete',
+                    'publish-update',
+                ],
+            ],
         ],
     ],
     'service_manager' => [
