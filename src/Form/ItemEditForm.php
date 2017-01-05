@@ -9,6 +9,7 @@ use Item\Service;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 use Zend\Filter;
+use Item\Exception;
 
 class ItemEditForm extends Form
 {
@@ -104,20 +105,26 @@ class ItemEditForm extends Form
         $this->add($element);
 
         $fieldsetClass = StaticFilter::execute($this->getName(), Filter\Word\DashToCamelCase::class);
-        $fieldsetClass = sprintf('%s\%sFieldset', __NAMESPACE__, $fieldsetClass);
+        $fieldsetClass = sprintf('Application\\Form\\%sFieldset', $fieldsetClass);
 
         if (class_exists($fieldsetClass)) {
             $this->add(new $fieldsetClass('fields'));
         }
 
         $partFieldsetClass = StaticFilter::execute($this->getName(), Filter\Word\DashToCamelCase::class);
-        $partFieldsetClass = sprintf('%s\%sPartFieldset', __NAMESPACE__, $partFieldsetClass);
+        $partFieldsetClass = sprintf('Application\\Form\\%sPartFieldset', $partFieldsetClass);
 
         if (class_exists($partFieldsetClass)) {
 
+            $partFieldset = new $partFieldsetClass('part');
+
+            if (!($partFieldset instanceof AbstractItemPartFieldset)) {
+                throw new Exception\LogicException(sprintf('Part fieldset must extend: %s', AbstractItemPartFieldset::class));
+            }
+
             $element = new Element\Collection('parts');
             $element->setCount(1);
-            $element->setTargetElement(new $partFieldsetClass('part'));
+            $element->setTargetElement($partFieldset);
             $this->add($element);
         }
 
