@@ -52,8 +52,8 @@ class ItemRepository
 
         $conditions = $this->entityManager->createConditions();
         $conditions->field('status')->eq(VersionableInterface::STATUS_PUBLISHED);
-        $conditions->field('liveFrom')->lt($now);
-        $conditions->field('expiresEnd')->gt($now);
+        $conditions->field('live_from')->lt($now);
+        $conditions->field('expires_end')->gt($now);
 
         if (null !== $offset && null !== $showPerPage) {
             $conditions->paging($offset, $showPerPage);
@@ -69,7 +69,7 @@ class ItemRepository
     public function getAllVersionOf($versionOfId)
     {
         $conditions = $this->entityManager->createConditions();
-        $conditions->field('versionOf.id')->eq($versionOfId);
+        $conditions->field('version_of.id')->eq($versionOfId);
 
         return $this->entityManager->findAll(Item::class, $conditions);
     }

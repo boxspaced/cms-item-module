@@ -2,7 +2,7 @@
 namespace Item;
 
 use Boxspaced\EntityManager\Entity\AbstractEntity;
-use Boxspaced\EntityManager\Mapper\Conditions\Conditions;
+use Boxspaced\EntityManager\Mapper\Conditions;
 use Zend\Router\Http\Segment;
 use Core\Model\RepositoryFactory;
 use Slug\Model\Route;
@@ -109,13 +109,13 @@ return [
                     'params' => [
                         'table' => 'item',
                         'columns' => [
-                            'versionOf' => 'version_of_id',
+                            'version_of' => 'version_of_id',
                             'type' => 'type_id',
                             'author' => 'author_id',
-                            'provisionalLocation' => 'provisional_location_id',
+                            'provisional_location' => 'provisional_location_id',
                             'route' => 'route_id',
                             'template' => 'template_id',
-                            'teaserTemplate' => 'teaser_template_id',
+                            'teaser_template' => 'teaser_template_id',
                         ],
                     ],
                 ],
@@ -124,49 +124,49 @@ return [
                         'id' => [
                             'type' => AbstractEntity::TYPE_INT,
                         ],
-                        'colourScheme' => [
+                        'colour_scheme' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'navText' => [
+                        'nav_text' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'metaKeywords' => [
+                        'meta_keywords' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'metaDescription' => [
+                        'meta_description' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
                         'title' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'publishedTo' => [
+                        'published_to' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'liveFrom' => [
+                        'live_from' => [
                             'type' => AbstractEntity::TYPE_DATETIME,
                         ],
-                        'expiresEnd' => [
+                        'expires_end' => [
                             'type' => AbstractEntity::TYPE_DATETIME,
                         ],
-                        'workflowStage' => [
+                        'workflow_stage' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
                         'status' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'authoredTime' => [
+                        'authored_time' => [
                             'type' => AbstractEntity::TYPE_DATETIME,
                         ],
-                        'lastModifiedTime' => [
+                        'last_modified_time' => [
                             'type' => AbstractEntity::TYPE_DATETIME,
                         ],
-                        'publishedTime' => [
+                        'published_time' => [
                             'type' => AbstractEntity::TYPE_DATETIME,
                         ],
-                        'rollbackStopPoint' => [
+                        'rollback_stop_point' => [
                             'type' => AbstractEntity::TYPE_DATETIME,
                         ],
-                        'versionOf' => [
+                        'version_of' => [
                             'type' => Model\Item::class,
                         ],
                         'type' => [
@@ -175,7 +175,7 @@ return [
                         'author' => [
                             'type' => User::class,
                         ],
-                        'provisionalLocation' => [
+                        'provisional_location' => [
                             'type' => ProvisionalLocation::class,
                         ],
                         'route' => [
@@ -184,44 +184,44 @@ return [
                         'template' => [
                             'type' => Model\ItemTemplate::class,
                         ],
-                        'teaserTemplate' => [
+                        'teaser_template' => [
                             'type' => Model\ItemTeaserTemplate::class,
                         ],
                     ],
-                    'children' => [
+                    'one_to_many' => [
                         'fields' => [
                             'type' => Model\ItemField::class,
                             'conditions' => function ($id) {
                                 return (new Conditions())
-                                        ->field('parentItem.id')->eq($id);
+                                        ->field('parent_item.id')->eq($id);
                             },
                         ],
                         'parts' => [
                             'type' => Model\ItemPart::class,
                             'conditions' => function ($id) {
                                 return (new Conditions())
-                                        ->field('parentItem.id')->eq($id);
+                                        ->field('parent_item.id')->eq($id);
                             },
                         ],
                         'notes' => [
                             'type' => Model\ItemNote::class,
                             'conditions' => function ($id) {
                                 return (new Conditions())
-                                        ->field('parentItem.id')->eq($id);
+                                        ->field('parent_item.id')->eq($id);
                             },
                         ],
-                        'freeBlocks' => [
+                        'free_blocks' => [
                             'type' => Model\ItemFreeBlock::class,
                             'conditions' => function ($id) {
                                 return (new Conditions())
-                                        ->field('parentItem.id')->eq($id);
+                                        ->field('parent_item.id')->eq($id);
                             },
                         ],
-                        'blockSequences' => [
+                        'block_sequences' => [
                             'type' => Model\ItemBlockSequence::class,
                             'conditions' => function ($id) {
                                 return (new Conditions())
-                                        ->field('parentItem.id')->eq($id);
+                                        ->field('parent_item.id')->eq($id);
                             },
                         ],
                     ],
@@ -247,23 +247,23 @@ return [
                         'description' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'multipleParts' => [
+                        'multiple_parts' => [
                             'type' => AbstractEntity::TYPE_BOOL,
                         ],
                     ],
-                    'children' => [
+                    'one_to_many' => [
                         'templates' => [
                             'type' => Model\ItemTemplate::class,
                             'conditions' => function ($id) {
                                 return (new Conditions())
-                                        ->field('forType.id')->eq($id);
+                                        ->field('for_type.id')->eq($id);
                             },
                         ],
-                        'teaserTemplates' => [
+                        'teaser_templates' => [
                             'type' => Model\ItemTeaserTemplate::class,
                             'conditions' => function ($id) {
                                 return (new Conditions())
-                                        ->field('forType.id')->eq($id);
+                                        ->field('for_type.id')->eq($id);
                             },
                         ],
                     ],
@@ -274,7 +274,7 @@ return [
                     'params' => [
                         'table' => 'item_field',
                         'columns' => [
-                            'parentItem' => 'item_id',
+                            'parent_item' => 'item_id',
                         ],
                     ],
                 ],
@@ -289,7 +289,7 @@ return [
                         'value' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'parentItem' => [
+                        'parent_item' => [
                             'type' => Model\Item::class,
                         ],
                     ],
@@ -300,7 +300,7 @@ return [
                     'params' => [
                         'table' => 'item_part',
                         'columns' => [
-                            'parentItem' => 'item_id',
+                            'parent_item' => 'item_id',
                         ],
                     ],
                 ],
@@ -309,19 +309,19 @@ return [
                         'id' => [
                             'type' => AbstractEntity::TYPE_INT,
                         ],
-                        'orderBy' => [
+                        'order_by' => [
                             'type' => AbstractEntity::TYPE_INT,
                         ],
-                        'parentItem' => [
+                        'parent_item' => [
                             'type' => Model\Item::class,
                         ],
                     ],
-                    'children' => [
+                    'one_to_many' => [
                         'fields' => [
                             'type' => Model\ItemPartField::class,
                             'conditions' => function ($id) {
                                 return (new Conditions())
-                                        ->field('parentPart.id')->eq($id);
+                                        ->field('parent_part.id')->eq($id);
                             },
                         ],
                     ],
@@ -332,7 +332,7 @@ return [
                     'params' => [
                         'table' => 'item_part_field',
                         'columns' => [
-                            'parentPart' => 'part_id',
+                            'parent_part' => 'part_id',
                         ],
                     ],
                 ],
@@ -347,7 +347,7 @@ return [
                         'value' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'parentPart' => [
+                        'parent_part' => [
                             'type' => Model\ItemPart::class,
                         ],
                     ],
@@ -358,7 +358,7 @@ return [
                     'params' => [
                         'table' => 'item_note',
                         'columns' => [
-                            'parentItem' => 'item_id',
+                            'parent_item' => 'item_id',
                             'user' => 'user_id',
                         ],
                     ],
@@ -371,10 +371,10 @@ return [
                         'text' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'createdTime' => [
+                        'created_time' => [
                             'type' => AbstractEntity::TYPE_DATETIME,
                         ],
-                        'parentItem' => [
+                        'parent_item' => [
                             'type' => Model\Item::class,
                         ],
                         'user' => [
@@ -388,7 +388,7 @@ return [
                     'params' => [
                         'table' => 'item_template',
                         'columns' => [
-                            'forType' => 'for_type_id',
+                            'for_type' => 'for_type_id',
                         ],
                     ],
                 ],
@@ -400,22 +400,22 @@ return [
                         'name' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'viewScript' => [
+                        'view_script' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
                         'description' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'forType' => [
+                        'for_type' => [
                             'type' => Model\ItemType::class,
                         ],
                     ],
-                    'children' => [
+                    'one_to_many' => [
                         'blocks' => [
                             'type' => Model\ItemTemplateBlock::class,
                             'conditions' => function ($id) {
                                 return (new Conditions())
-                                        ->field('parentTemplate.id')->eq($id);
+                                        ->field('parent_template.id')->eq($id);
                             },
                         ],
                     ],
@@ -426,7 +426,7 @@ return [
                     'params' => [
                         'table' => 'item_teaser_template',
                         'columns' => [
-                            'forType' => 'for_type_id',
+                            'for_type' => 'for_type_id',
                         ],
                     ],
                 ],
@@ -438,13 +438,13 @@ return [
                         'name' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'viewScript' => [
+                        'view_script' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
                         'description' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'forType' => [
+                        'for_type' => [
                             'type' => Model\ItemType::class,
                         ],
                     ],
@@ -455,7 +455,7 @@ return [
                     'params' => [
                         'table' => 'item_template_block',
                         'columns' => [
-                            'parentTemplate' => 'template_id',
+                            'parent_template' => 'template_id',
                         ],
                     ],
                 ],
@@ -467,13 +467,13 @@ return [
                         'name' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
-                        'adminLabel' => [
+                        'admin_label' => [
                             'type' => AbstractEntity::TYPE_STRING,
                         ],
                         'sequence' => [
                             'type' => AbstractEntity::TYPE_BOOL,
                         ],
-                        'parentTemplate' => [
+                        'parent_template' => [
                             'type' => Model\ItemTemplate::class,
                         ],
                     ],
@@ -484,8 +484,8 @@ return [
                     'params' => [
                         'table' => 'item_free_block',
                         'columns' => [
-                            'parentItem' => 'item_id',
-                            'templateBlock' => 'template_block_id',
+                            'parent_item' => 'item_id',
+                            'template_block' => 'template_block_id',
                             'block' => 'block_id',
                         ],
                     ],
@@ -495,10 +495,10 @@ return [
                         'id' => [
                             'type' => AbstractEntity::TYPE_INT,
                         ],
-                        'parentItem' => [
+                        'parent_item' => [
                             'type' => Model\Item::class,
                         ],
-                        'templateBlock' => [
+                        'template_block' => [
                             'type' => Model\ItemTemplateBlock::class,
                         ],
                         'block' => [
@@ -512,8 +512,8 @@ return [
                     'params' => [
                         'table' => 'item_block_sequence',
                         'columns' => [
-                            'parentItem' => 'item_id',
-                            'templateBlock' => 'template_block_id',
+                            'parent_item' => 'item_id',
+                            'template_block' => 'template_block_id',
                         ],
                     ],
                 ],
@@ -522,20 +522,20 @@ return [
                         'id' => [
                             'type' => AbstractEntity::TYPE_INT,
                         ],
-                        'parentItem' => [
+                        'parent_item' => [
                             'type' => Model\Item::class,
                         ],
-                        'templateBlock' => [
+                        'template_block' => [
                             'type' => Model\ItemTemplateBlock::class,
                         ],
                     ],
-                    'children' => [
+                    'one_to_many' => [
                         'blocks' => [
                             'type' => Model\ItemBlockSequenceBlock::class,
                             'conditions' => function ($id) {
                                 return (new Conditions())
-                                        ->field('parentBlockSequence.id')->eq($id)
-                                        ->order('orderBy', Conditions::ORDER_ASC);
+                                        ->field('parent_block_sequence.id')->eq($id)
+                                        ->order('order_by', Conditions::ORDER_ASC);
                             },
                         ],
                     ],
@@ -546,7 +546,7 @@ return [
                     'params' => [
                         'table' => 'item_block_sequence_block',
                         'columns' => [
-                            'parentBlockSequence' => 'block_sequence_id',
+                            'parent_block_sequence' => 'block_sequence_id',
                             'block' => 'block_id',
                         ],
                     ],
@@ -556,10 +556,10 @@ return [
                         'id' => [
                             'type' => AbstractEntity::TYPE_INT,
                         ],
-                        'orderBy' => [
+                        'order_by' => [
                             'type' => AbstractEntity::TYPE_INT,
                         ],
-                        'parentBlockSequence' => [
+                        'parent_block_sequence' => [
                             'type' => Model\ItemBlockSequence::class,
                         ],
                         'block' => [

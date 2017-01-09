@@ -30,7 +30,7 @@ class ItemPart extends AbstractEntity
      */
     public function getOrderBy()
     {
-        return $this->get('orderBy');
+        return $this->get('order_by');
     }
 
     /**
@@ -39,7 +39,7 @@ class ItemPart extends AbstractEntity
      */
     public function setOrderBy($orderBy)
     {
-        $this->set('orderBy', $orderBy);
+        $this->set('order_by', $orderBy);
 		return $this;
     }
 
@@ -48,7 +48,7 @@ class ItemPart extends AbstractEntity
      */
     public function getParentItem()
     {
-        return $this->get('parentItem');
+        return $this->get('parent_item');
     }
 
     /**
@@ -57,7 +57,7 @@ class ItemPart extends AbstractEntity
      */
     public function setParentItem(Item $parentItem)
     {
-        $this->set('parentItem', $parentItem);
+        $this->set('parent_item', $parentItem);
 		return $this;
     }
 

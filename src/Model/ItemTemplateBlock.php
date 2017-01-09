@@ -29,7 +29,7 @@ class ItemTemplateBlock extends AbstractEntity
      */
     public function getParentTemplate()
     {
-        return $this->get('parentTemplate');
+        return $this->get('parent_template');
     }
 
     /**
@@ -38,7 +38,7 @@ class ItemTemplateBlock extends AbstractEntity
      */
     public function setParentTemplate(ItemTemplate $parentTemplate)
     {
-        $this->set('parentTemplate', $parentTemplate);
+        $this->set('parent_template', $parentTemplate);
 		return $this;
     }
 
@@ -65,7 +65,7 @@ class ItemTemplateBlock extends AbstractEntity
      */
     public function getAdminLabel()
     {
-        return $this->get('adminLabel');
+        return $this->get('admin_label');
     }
 
     /**
@@ -74,7 +74,7 @@ class ItemTemplateBlock extends AbstractEntity
      */
     public function setAdminLabel($adminLabel)
     {
-        $this->set('adminLabel', $adminLabel);
+        $this->set('admin_label', $adminLabel);
 		return $this;
     }
 

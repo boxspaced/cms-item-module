@@ -15,9 +15,9 @@ class Item extends AbstractEntity
      * @var array
      */
     protected $versioningTransferFields = array(
-        'navText',
-        'metaKeywords',
-        'metaDescription',
+        'nav_text',
+        'meta_keywords',
+        'meta_description',
         'title',
         'fields',
         'parts',
@@ -46,7 +46,7 @@ class Item extends AbstractEntity
      */
     public function getVersionOf()
     {
-        return $this->get('versionOf');
+        return $this->get('version_of');
     }
 
     /**
@@ -55,7 +55,7 @@ class Item extends AbstractEntity
      */
     public function setVersionOf(Item $versionOf)
     {
-        $this->set('versionOf', $versionOf);
+        $this->set('version_of', $versionOf);
 		return $this;
     }
 
@@ -118,7 +118,7 @@ class Item extends AbstractEntity
      */
     public function getTeaserTemplate()
     {
-        return $this->get('teaserTemplate');
+        return $this->get('teaser_template');
     }
 
     /**
@@ -127,7 +127,7 @@ class Item extends AbstractEntity
      */
     public function setTeaserTemplate(ItemTeaserTemplate $teaserTemplate = null)
     {
-        $this->set('teaserTemplate', $teaserTemplate);
+        $this->set('teaser_template', $teaserTemplate);
 		return $this;
     }
 
@@ -136,7 +136,7 @@ class Item extends AbstractEntity
      */
     public function getColourScheme()
     {
-        return $this->get('colourScheme');
+        return $this->get('colour_scheme');
     }
 
     /**
@@ -145,7 +145,7 @@ class Item extends AbstractEntity
      */
     public function setColourScheme($colourScheme)
     {
-        $this->set('colourScheme', $colourScheme);
+        $this->set('colour_scheme', $colourScheme);
 		return $this;
     }
 
@@ -154,7 +154,7 @@ class Item extends AbstractEntity
      */
     public function getNavText()
     {
-        return $this->get('navText');
+        return $this->get('nav_text');
     }
 
     /**
@@ -163,7 +163,7 @@ class Item extends AbstractEntity
      */
     public function setNavText($navText)
     {
-        $this->set('navText', $navText);
+        $this->set('nav_text', $navText);
 		return $this;
     }
 
@@ -172,7 +172,7 @@ class Item extends AbstractEntity
      */
     public function getMetaKeywords()
     {
-        return $this->get('metaKeywords');
+        return $this->get('meta_keywords');
     }
 
     /**
@@ -181,7 +181,7 @@ class Item extends AbstractEntity
      */
     public function setMetaKeywords($metaKeywords)
     {
-        $this->set('metaKeywords', $metaKeywords);
+        $this->set('meta_keywords', $metaKeywords);
 		return $this;
     }
 
@@ -190,7 +190,7 @@ class Item extends AbstractEntity
      */
     public function getMetaDescription()
     {
-        return $this->get('metaDescription');
+        return $this->get('meta_description');
     }
 
     /**
@@ -199,7 +199,7 @@ class Item extends AbstractEntity
      */
     public function setMetaDescription($metaDescription)
     {
-        $this->set('metaDescription', $metaDescription);
+        $this->set('meta_description', $metaDescription);
 		return $this;
     }
 
@@ -226,7 +226,7 @@ class Item extends AbstractEntity
      */
     public function getProvisionalLocation()
     {
-        return $this->get('provisionalLocation');
+        return $this->get('provisional_location');
     }
 
     /**
@@ -235,7 +235,7 @@ class Item extends AbstractEntity
      */
     public function setProvisionalLocation(ProvisionalLocation $provisionalLocation = null)
     {
-        $this->set('provisionalLocation', $provisionalLocation);
+        $this->set('provisional_location', $provisionalLocation);
 		return $this;
     }
 
@@ -244,7 +244,7 @@ class Item extends AbstractEntity
      */
     public function getPublishedTo()
     {
-        return $this->get('publishedTo');
+        return $this->get('published_to');
     }
 
     /**
@@ -253,7 +253,7 @@ class Item extends AbstractEntity
      */
     public function setPublishedTo($publishedTo)
     {
-        $this->set('publishedTo', $publishedTo);
+        $this->set('published_to', $publishedTo);
 		return $this;
     }
 
@@ -262,7 +262,7 @@ class Item extends AbstractEntity
      */
     public function getLiveFrom()
     {
-        return $this->get('liveFrom');
+        return $this->get('live_from');
     }
 
     /**
@@ -271,7 +271,7 @@ class Item extends AbstractEntity
      */
     public function setLiveFrom(DateTime $liveFrom = null)
     {
-        $this->set('liveFrom', $liveFrom);
+        $this->set('live_from', $liveFrom);
 		return $this;
     }
 
@@ -280,7 +280,7 @@ class Item extends AbstractEntity
      */
     public function getExpiresEnd()
     {
-        return $this->get('expiresEnd');
+        return $this->get('expires_end');
     }
 
     /**
@@ -289,7 +289,7 @@ class Item extends AbstractEntity
      */
     public function setExpiresEnd(DateTime $expiresEnd = null)
     {
-        $this->set('expiresEnd', $expiresEnd);
+        $this->set('expires_end', $expiresEnd);
 		return $this;
     }
 
@@ -298,7 +298,7 @@ class Item extends AbstractEntity
      */
     public function getWorkflowStage()
     {
-        return $this->get('workflowStage');
+        return $this->get('workflow_stage');
     }
 
     /**
@@ -307,7 +307,7 @@ class Item extends AbstractEntity
      */
     public function setWorkflowStage($workflowStage)
     {
-        $this->set('workflowStage', $workflowStage);
+        $this->set('workflow_stage', $workflowStage);
 		return $this;
     }
 
@@ -352,7 +352,7 @@ class Item extends AbstractEntity
      */
     public function getAuthoredTime()
     {
-        return $this->get('authoredTime');
+        return $this->get('authored_time');
     }
 
     /**
@@ -361,7 +361,7 @@ class Item extends AbstractEntity
      */
     public function setAuthoredTime(DateTime $authoredTime = null)
     {
-        $this->set('authoredTime', $authoredTime);
+        $this->set('authored_time', $authoredTime);
 		return $this;
     }
 
@@ -370,7 +370,7 @@ class Item extends AbstractEntity
      */
     public function getLastModifiedTime()
     {
-        return $this->get('lastModifiedTime');
+        return $this->get('last_modified_time');
     }
 
     /**
@@ -379,7 +379,7 @@ class Item extends AbstractEntity
      */
     public function setLastModifiedTime(DateTime $lastModifiedTime = null)
     {
-        $this->set('lastModifiedTime', $lastModifiedTime);
+        $this->set('last_modified_time', $lastModifiedTime);
 		return $this;
     }
 
@@ -388,7 +388,7 @@ class Item extends AbstractEntity
      */
     public function getPublishedTime()
     {
-        return $this->get('publishedTime');
+        return $this->get('published_time');
     }
 
     /**
@@ -397,7 +397,7 @@ class Item extends AbstractEntity
      */
     public function setPublishedTime(DateTime $publishedTime = null)
     {
-        $this->set('publishedTime', $publishedTime);
+        $this->set('published_time', $publishedTime);
 		return $this;
     }
 
@@ -406,7 +406,7 @@ class Item extends AbstractEntity
      */
     public function getRollbackStopPoint()
     {
-        return $this->get('rollbackStopPoint');
+        return $this->get('rollback_stop_point');
     }
 
     /**
@@ -415,7 +415,7 @@ class Item extends AbstractEntity
      */
     public function setRollbackStopPoint(DateTime $rollbackStopPoint = null)
     {
-        $this->set('rollbackStopPoint', $rollbackStopPoint);
+        $this->set('rollback_stop_point', $rollbackStopPoint);
 		return $this;
     }
 
@@ -547,7 +547,7 @@ class Item extends AbstractEntity
      */
     public function getFreeBlocks()
     {
-        return $this->get('freeBlocks');
+        return $this->get('free_blocks');
     }
 
     /**
@@ -588,7 +588,7 @@ class Item extends AbstractEntity
      */
     public function getBlockSequences()
     {
-        return $this->get('blockSequences');
+        return $this->get('block_sequences');
     }
 
     /**

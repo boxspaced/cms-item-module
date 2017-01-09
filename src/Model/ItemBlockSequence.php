@@ -30,7 +30,7 @@ class ItemBlockSequence extends AbstractEntity
      */
     public function getParentItem()
     {
-        return $this->get('parentItem');
+        return $this->get('parent_item');
     }
 
     /**
@@ -39,7 +39,7 @@ class ItemBlockSequence extends AbstractEntity
      */
     public function setParentItem(Item $parentItem)
     {
-        $this->set('parentItem', $parentItem);
+        $this->set('parent_item', $parentItem);
 		return $this;
     }
 
@@ -48,7 +48,7 @@ class ItemBlockSequence extends AbstractEntity
      */
     public function getTemplateBlock()
     {
-        return $this->get('templateBlock');
+        return $this->get('template_block');
     }
 
     /**
@@ -57,7 +57,7 @@ class ItemBlockSequence extends AbstractEntity
      */
     public function setTemplateBlock(ItemTemplateBlock $templateBlock)
     {
-        $this->set('templateBlock', $templateBlock);
+        $this->set('template_block', $templateBlock);
 		return $this;
     }
 

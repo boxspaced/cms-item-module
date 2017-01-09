@@ -84,7 +84,7 @@ class ItemType extends AbstractEntity
      */
     public function getMultipleParts()
     {
-        return $this->get('multipleParts');
+        return $this->get('multiple_parts');
     }
 
     /**
@@ -93,7 +93,7 @@ class ItemType extends AbstractEntity
      */
     public function setMultipleParts($multipleParts)
     {
-        $this->set('multipleParts', $multipleParts);
+        $this->set('multiple_parts', $multipleParts);
 		return $this;
     }
 
@@ -142,7 +142,7 @@ class ItemType extends AbstractEntity
      */
     public function getTeaserTemplates()
     {
-        return $this->get('teaserTemplates');
+        return $this->get('teaser_templates');
     }
 
     /**

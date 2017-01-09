@@ -65,7 +65,7 @@ class ItemField extends AbstractEntity
      */
     public function getParentItem()
     {
-        return $this->get('parentItem');
+        return $this->get('parent_item');
     }
 
     /**
@@ -74,7 +74,7 @@ class ItemField extends AbstractEntity
      */
     public function setParentItem(Item $parentItem)
     {
-        $this->set('parentItem', $parentItem);
+        $this->set('parent_item', $parentItem);
 		return $this;
     }
 

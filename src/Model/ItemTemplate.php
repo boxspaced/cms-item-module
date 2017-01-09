@@ -30,7 +30,7 @@ class ItemTemplate extends AbstractEntity
      */
     public function getForType()
     {
-        return $this->get('forType');
+        return $this->get('for_type');
     }
 
     /**
@@ -39,7 +39,7 @@ class ItemTemplate extends AbstractEntity
      */
     public function setForType(ItemType $forType)
     {
-        $this->set('forType', $forType);
+        $this->set('for_type', $forType);
 		return $this;
     }
 
@@ -66,7 +66,7 @@ class ItemTemplate extends AbstractEntity
      */
     public function getViewScript()
     {
-        return $this->get('viewScript');
+        return $this->get('view_script');
     }
 
     /**
@@ -75,7 +75,7 @@ class ItemTemplate extends AbstractEntity
      */
     public function setViewScript($viewScript)
     {
-        $this->set('viewScript', $viewScript);
+        $this->set('view_script', $viewScript);
 		return $this;
     }
 

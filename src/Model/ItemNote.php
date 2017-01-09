@@ -31,7 +31,7 @@ class ItemNote extends AbstractEntity
      */
     public function getParentItem()
     {
-        return $this->get('parentItem');
+        return $this->get('parent_item');
     }
 
     /**
@@ -40,7 +40,7 @@ class ItemNote extends AbstractEntity
      */
     public function setParentItem(Item $parentItem)
     {
-        $this->set('parentItem', $parentItem);
+        $this->set('parent_item', $parentItem);
 		return $this;
     }
 
@@ -85,7 +85,7 @@ class ItemNote extends AbstractEntity
      */
     public function getCreatedTime()
     {
-        return $this->get('createdTime');
+        return $this->get('created_time');
     }
 
     /**
@@ -94,7 +94,7 @@ class ItemNote extends AbstractEntity
      */
     public function setCreatedTime(DateTime $createdTime = null)
     {
-        $this->set('createdTime', $createdTime);
+        $this->set('created_time', $createdTime);
 		return $this;
     }
 

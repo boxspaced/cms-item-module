@@ -65,7 +65,7 @@ class ItemPartField extends AbstractEntity
      */
     public function getParentPart()
     {
-        return $this->get('parentPart');
+        return $this->get('parent_part');
     }
 
     /**
@@ -74,7 +74,7 @@ class ItemPartField extends AbstractEntity
      */
     public function setParentPart(ItemPart $parentPart)
     {
-        $this->set('parentPart', $parentPart);
+        $this->set('parent_part', $parentPart);
 		return $this;
     }
 
