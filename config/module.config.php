@@ -3,6 +3,7 @@ namespace Item;
 
 use Boxspaced\EntityManager\Entity\AbstractEntity;
 use Boxspaced\EntityManager\Mapper\Conditions;
+use Boxspaced\EntityManagerModule\Mapper\ConditionsFactory;
 use Zend\Router\Http\Segment;
 use Core\Model\RepositoryFactory;
 use Slug\Model\Route;
@@ -191,38 +192,78 @@ return [
                     'one_to_many' => [
                         'fields' => [
                             'type' => Model\ItemField::class,
-                            'conditions' => function ($id) {
-                                return (new Conditions())
-                                        ->field('parent_item.id')->eq($id);
-                            },
+                            'conditions' => [
+                                'factory' => ConditionsFactory::class,
+                                'options' => [
+                                    'constraints' => [
+                                        [
+                                            'field' => 'parent_item.id',
+                                            'operation' => 'eq',
+                                            'value' => ':id',
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
                         'parts' => [
                             'type' => Model\ItemPart::class,
-                            'conditions' => function ($id) {
-                                return (new Conditions())
-                                        ->field('parent_item.id')->eq($id);
-                            },
+                            'conditions' => [
+                                'factory' => ConditionsFactory::class,
+                                'options' => [
+                                    'constraints' => [
+                                        [
+                                            'field' => 'parent_item.id',
+                                            'operation' => 'eq',
+                                            'value' => ':id',
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
                         'notes' => [
                             'type' => Model\ItemNote::class,
-                            'conditions' => function ($id) {
-                                return (new Conditions())
-                                        ->field('parent_item.id')->eq($id);
-                            },
+                            'conditions' => [
+                                'factory' => ConditionsFactory::class,
+                                'options' => [
+                                    'constraints' => [
+                                        [
+                                            'field' => 'parent_item.id',
+                                            'operation' => 'eq',
+                                            'value' => ':id',
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
                         'free_blocks' => [
                             'type' => Model\ItemFreeBlock::class,
-                            'conditions' => function ($id) {
-                                return (new Conditions())
-                                        ->field('parent_item.id')->eq($id);
-                            },
+                            'conditions' => [
+                                'factory' => ConditionsFactory::class,
+                                'options' => [
+                                    'constraints' => [
+                                        [
+                                            'field' => 'parent_item.id',
+                                            'operation' => 'eq',
+                                            'value' => ':id',
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
                         'block_sequences' => [
                             'type' => Model\ItemBlockSequence::class,
-                            'conditions' => function ($id) {
-                                return (new Conditions())
-                                        ->field('parent_item.id')->eq($id);
-                            },
+                            'conditions' => [
+                                'factory' => ConditionsFactory::class,
+                                'options' => [
+                                    'constraints' => [
+                                        [
+                                            'field' => 'parent_item.id',
+                                            'operation' => 'eq',
+                                            'value' => ':id',
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
                     ],
                 ],
@@ -254,17 +295,33 @@ return [
                     'one_to_many' => [
                         'templates' => [
                             'type' => Model\ItemTemplate::class,
-                            'conditions' => function ($id) {
-                                return (new Conditions())
-                                        ->field('for_type.id')->eq($id);
-                            },
+                            'conditions' => [
+                                'factory' => ConditionsFactory::class,
+                                'options' => [
+                                    'constraints' => [
+                                        [
+                                            'field' => 'for_type.id',
+                                            'operation' => 'eq',
+                                            'value' => ':id',
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
                         'teaser_templates' => [
                             'type' => Model\ItemTeaserTemplate::class,
-                            'conditions' => function ($id) {
-                                return (new Conditions())
-                                        ->field('for_type.id')->eq($id);
-                            },
+                            'conditions' => [
+                                'factory' => ConditionsFactory::class,
+                                'options' => [
+                                    'constraints' => [
+                                        [
+                                            'field' => 'for_type.id',
+                                            'operation' => 'eq',
+                                            'value' => ':id',
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
                     ],
                 ],
@@ -319,10 +376,18 @@ return [
                     'one_to_many' => [
                         'fields' => [
                             'type' => Model\ItemPartField::class,
-                            'conditions' => function ($id) {
-                                return (new Conditions())
-                                        ->field('parent_part.id')->eq($id);
-                            },
+                            'conditions' => [
+                                'factory' => ConditionsFactory::class,
+                                'options' => [
+                                    'constraints' => [
+                                        [
+                                            'field' => 'parent_part.id',
+                                            'operation' => 'eq',
+                                            'value' => ':id',
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
                     ],
                 ],
@@ -413,10 +478,18 @@ return [
                     'one_to_many' => [
                         'blocks' => [
                             'type' => Model\ItemTemplateBlock::class,
-                            'conditions' => function ($id) {
-                                return (new Conditions())
-                                        ->field('parent_template.id')->eq($id);
-                            },
+                            'conditions' => [
+                                'factory' => ConditionsFactory::class,
+                                'options' => [
+                                    'constraints' => [
+                                        [
+                                            'field' => 'parent_template.id',
+                                            'operation' => 'eq',
+                                            'value' => ':id',
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
                     ],
                 ],
@@ -532,11 +605,24 @@ return [
                     'one_to_many' => [
                         'blocks' => [
                             'type' => Model\ItemBlockSequenceBlock::class,
-                            'conditions' => function ($id) {
-                                return (new Conditions())
-                                        ->field('parent_block_sequence.id')->eq($id)
-                                        ->order('order_by', Conditions::ORDER_ASC);
-                            },
+                            'conditions' => [
+                                'factory' => ConditionsFactory::class,
+                                'options' => [
+                                    'constraints' => [
+                                        [
+                                            'field' => 'parent_block_sequence.id',
+                                            'operation' => 'eq',
+                                            'value' => ':id',
+                                        ],
+                                    ],
+                                    'ordering' => [
+                                        [
+                                            'field' => 'order_by',
+                                            'direction' => Conditions::ORDER_ASC,
+                                        ],
+                                    ],
+                                ],
+                            ],
                         ],
                     ],
                 ],
