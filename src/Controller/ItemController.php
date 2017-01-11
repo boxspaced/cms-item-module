@@ -213,7 +213,7 @@ class ItemController extends AbstractActionController
             throw new Exception\RuntimeException('Item template not found');
         }
 
-        $this->view->setTemplate('item/item/' . $itemTemplate->viewScript . '.phtml');
+        $this->view->setTemplate('cms-item-module/item/' . $itemTemplate->viewScript . '.phtml');
         $this->layout()->template = $itemTemplate->name;
 
         foreach ($item as $name => $value) {
@@ -688,7 +688,7 @@ class ItemController extends AbstractActionController
         $form->get('confirm')->setValue('Confirm delete');
 
         $this->view->form = $form;
-        $this->view->setTemplate('item/item/confirm.phtml');
+        $this->view->setTemplate('cms-item-module/item/confirm.phtml');
 
         if (!$this->getRequest()->isPost()) {
             return $this->view;
@@ -735,7 +735,7 @@ class ItemController extends AbstractActionController
         $form->get('confirm')->setValue('Confirm update');
 
         $this->view->form = $form;
-        $this->view->setTemplate('item/item/confirm.phtml');
+        $this->view->setTemplate('cms-item-module/item/confirm.phtml');
 
         if (!$this->getRequest()->isPost()) {
             return $this->view;
