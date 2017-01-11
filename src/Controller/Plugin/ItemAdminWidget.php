@@ -63,7 +63,7 @@ class ItemAdminWidget extends AbstractPlugin
             'allowDelete' => $this->accountService->isAllowed('item', 'delete'),
         ]);
 
-        return $viewModel->setTemplate('cms-item-module/item/admin-widget.phtml');
+        return $viewModel->setTemplate('boxspaced/cms-item-module/item/admin-widget.phtml');
     }
 
     /**
