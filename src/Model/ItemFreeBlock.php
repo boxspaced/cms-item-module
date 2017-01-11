@@ -1,8 +1,8 @@
 <?php
-namespace Item\Model;
+namespace Boxspaced\CmsItemModule\Model;
 
 use Boxspaced\EntityManager\Entity\AbstractEntity;
-use Block\Model\Block;
+use Boxspaced\CmsBlockModule\Model\Block;
 
 class ItemFreeBlock extends AbstractEntity
 {

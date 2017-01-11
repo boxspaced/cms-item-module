@@ -1,7 +1,7 @@
 <?php
-namespace Item\Service;
+namespace Boxspaced\CmsItemModule\Service;
 
-use Item\Model\ItemTemplate as ItemTemplateEntity;
+use Boxspaced\CmsItemModule\Model\ItemTemplate as ItemTemplateEntity;
 
 class ItemTemplate
 {

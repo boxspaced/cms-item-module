@@ -1,15 +1,15 @@
 <?php
-namespace Item\Form;
+namespace Boxspaced\CmsItemModule\Form;
 
 use Zend\Form\Form;
 use Zend\Form\Element;
-use Workflow\Service\WorkflowService;
+use Boxspaced\CmsWorkflowModule\Service\WorkflowService;
 use Zend\Filter\StaticFilter;
-use Item\Service;
+use Boxspaced\CmsItemModule\Service;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 use Zend\Filter;
-use Item\Exception;
+use Boxspaced\CmsItemModule\Exception;
 
 class ItemEditForm extends Form
 {

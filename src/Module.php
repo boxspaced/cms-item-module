@@ -1,5 +1,5 @@
 <?php
-namespace Item;
+namespace Boxspaced\CmsItemModule;
 
 class Module
 {

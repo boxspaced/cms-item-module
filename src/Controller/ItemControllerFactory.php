@@ -1,15 +1,15 @@
 <?php
-namespace Item\Controller;
+namespace Boxspaced\CmsItemModule\Controller;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Item\Controller\ItemController;
-use Item\Service\ItemService;
-use Workflow\Service\WorkflowService;
-use Account\Service\AccountService;
+use Boxspaced\CmsItemModule\Controller\ItemController;
+use Boxspaced\CmsItemModule\Service\ItemService;
+use Boxspaced\CmsWorkflowModule\Service\WorkflowService;
+use Boxspaced\CmsAccountModule\Service\AccountService;
 use Zend\Log\Logger;
-use Core\Controller\AbstractControllerFactory;
-use Block\Service\BlockService;
+use Boxspaced\CmsCoreModule\Controller\AbstractControllerFactory;
+use Boxspaced\CmsBlockModule\Service\BlockService;
 
 class ItemControllerFactory extends AbstractControllerFactory implements FactoryInterface
 {

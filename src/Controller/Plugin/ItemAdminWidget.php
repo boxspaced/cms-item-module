@@ -1,10 +1,10 @@
 <?php
-namespace Item\Controller\Plugin;
+namespace Boxspaced\CmsItemModule\Controller\Plugin;
 
 use DateTime;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\View\Model\ViewModel;
-use Account\Service\AccountService;
+use Boxspaced\CmsAccountModule\Service\AccountService;
 
 class ItemAdminWidget extends AbstractPlugin
 {

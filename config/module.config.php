@@ -1,16 +1,16 @@
 <?php
-namespace Item;
+namespace Boxspaced\CmsItemModule;
 
 use Boxspaced\EntityManager\Entity\AbstractEntity;
 use Boxspaced\EntityManager\Mapper\Conditions;
 use Boxspaced\EntityManagerModule\Mapper\ConditionsFactory;
 use Zend\Router\Http\Segment;
-use Core\Model\RepositoryFactory;
-use Slug\Model\Route;
-use Account\Model\User;
-use Core\Model\ProvisionalLocation;
+use Boxspaced\CmsCoreModule\Model\RepositoryFactory;
+use Boxspaced\CmsSlugModule\Model\Route;
+use Boxspaced\CmsAccountModule\Model\User;
+use Boxspaced\CmsCoreModule\Model\ProvisionalLocation;
 use Zend\ServiceManager\Factory\InvokableFactory;
-use Block\Model\Block;
+use Boxspaced\CmsBlockModule\Model\Block;
 use Zend\Permissions\Acl\Acl;
 
 return [

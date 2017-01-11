@@ -1,7 +1,7 @@
 <?php
-namespace Item\Service;
+namespace Boxspaced\CmsItemModule\Service;
 
-use Item\Model\ItemType as ItemTypeEntity;
+use Boxspaced\CmsItemModule\Model\ItemType as ItemTypeEntity;
 
 class ItemType
 {

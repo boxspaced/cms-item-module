@@ -1,7 +1,7 @@
 <?php
-namespace Item\Service;
+namespace Boxspaced\CmsItemModule\Service;
 
-use Item\Model\ItemField as ItemFieldEntity;
+use Boxspaced\CmsItemModule\Model\ItemField as ItemFieldEntity;
 
 class ItemField
 {

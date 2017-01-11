@@ -1,7 +1,7 @@
 <?php
-namespace Item\Service;
+namespace Boxspaced\CmsItemModule\Service;
 
-use Item\Model\ItemPart as ItemPartEntity;
+use Boxspaced\CmsItemModule\Model\ItemPart as ItemPartEntity;
 
 class ItemPart
 {

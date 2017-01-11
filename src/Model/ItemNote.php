@@ -1,9 +1,9 @@
 <?php
-namespace Item\Model;
+namespace Boxspaced\CmsItemModule\Model;
 
 use DateTime;
 use Boxspaced\EntityManager\Entity\AbstractEntity;
-use Account\Model\User;
+use Boxspaced\CmsAccountModule\Model\User;
 
 class ItemNote extends AbstractEntity
 {

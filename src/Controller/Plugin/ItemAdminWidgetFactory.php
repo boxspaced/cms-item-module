@@ -1,9 +1,9 @@
 <?php
-namespace Item\Controller\Plugin;
+namespace Boxspaced\CmsItemModule\Controller\Plugin;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Account\Service\AccountService;
+use Boxspaced\CmsAccountModule\Service\AccountService;
 
 class ItemAdminWidgetFactory implements FactoryInterface
 {

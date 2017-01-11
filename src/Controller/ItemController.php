@@ -1,17 +1,17 @@
 <?php
-namespace Item\Controller;
+namespace Boxspaced\CmsItemModule\Controller;
 
 use DateTime;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container as SessionContainer;
 use Zend\View\Model\ViewModel;
 use Zend\Log\Logger;
-use Item\Service;
-use Item\Exception;
-use Item\Form;
-use Account\Service\AccountService;
-use Workflow\Service\WorkflowService;
-use Block\Service\BlockService;
+use Boxspaced\CmsItemModule\Service;
+use Boxspaced\CmsItemModule\Exception;
+use Boxspaced\CmsItemModule\Form;
+use Boxspaced\CmsAccountModule\Service\AccountService;
+use Boxspaced\CmsWorkflowModule\Service\WorkflowService;
+use Boxspaced\CmsBlockModule\Service\BlockService;
 
 class ItemController extends AbstractActionController
 {

@@ -1,7 +1,7 @@
 <?php
-namespace Item\Service;
+namespace Boxspaced\CmsItemModule\Service;
 
-use Core\Model\ProvisionalLocation as ProvisionalLocationEntity;
+use Boxspaced\CmsCoreModule\Model\ProvisionalLocation as ProvisionalLocationEntity;
 
 class ProvisionalLocation
 {

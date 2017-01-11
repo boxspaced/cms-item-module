@@ -1,7 +1,7 @@
 <?php
-namespace Item\Service;
+namespace Boxspaced\CmsItemModule\Service;
 
-use Item\Model\ItemNote as ItemNoteEntity;
+use Boxspaced\CmsItemModule\Model\ItemNote as ItemNoteEntity;
 
 class ItemNote
 {

@@ -1,20 +1,20 @@
 <?php
-namespace Item\Service;
+namespace Boxspaced\CmsItemModule\Service;
 
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 use Zend\Log\Logger;
 use Zend\Authentication\AuthenticationService;
 use Boxspaced\EntityManager\EntityManager;
-use Item\Model;
-use Account\Model\UserRepository;
-use Core\Model\ModuleRepository;
-use Block\Model\BlockRepository;
-use Menu\Model\MenuRepository;
-use Slug\Model\RouteRepository;
-use Versioning\Model\VersioningService;
-use Workflow\Model\WorkflowService;
-use Core\Model\EntityFactory;
+use Boxspaced\CmsItemModule\Model;
+use Boxspaced\CmsAccountModule\Model\UserRepository;
+use Boxspaced\CmsCoreModule\Model\ModuleRepository;
+use Boxspaced\CmsBlockModule\Model\BlockRepository;
+use Boxspaced\CmsMenuModule\Model\MenuRepository;
+use Boxspaced\CmsSlugModule\Model\RouteRepository;
+use Boxspaced\CmsVersioningModule\Model\VersioningService;
+use Boxspaced\CmsWorkflowModule\Model\WorkflowService;
+use Boxspaced\CmsCoreModule\Model\EntityFactory;
 
 class ItemServiceFactory implements FactoryInterface
 {

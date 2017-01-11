@@ -1,14 +1,14 @@
 <?php
-namespace Item\Form;
+namespace Boxspaced\CmsItemModule\Form;
 
 use DateTime;
 use Zend\Form\Form;
 use Zend\Form\Element;
-use Block\Service\BlockService;
-use Workflow\Service\WorkflowService;
+use Boxspaced\CmsBlockModule\Service\BlockService;
+use Boxspaced\CmsWorkflowModule\Service\WorkflowService;
 use Zend\InputFilter\InputFilter;
 use Zend\Form\Fieldset;
-use Item\Service;
+use Boxspaced\CmsItemModule\Service;
 use Zend\Validator;
 use Zend\Filter;
 

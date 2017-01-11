@@ -1,5 +1,5 @@
 <?php
-namespace Item\Service;
+namespace Boxspaced\CmsItemModule\Service;
 
 use DateTime;
 

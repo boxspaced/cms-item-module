@@ -7,7 +7,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Item\\": "src/"
+            "Boxspaced\\CmsItemModule\\": "src/"
         }
     },
     "config": {
@@ -30,7 +30,7 @@
     ],
     "extra": {
         "zf": {
-            "module": "Item"
+            "module": "Boxspaced\\CmsItemModule"
         }
     }
 }

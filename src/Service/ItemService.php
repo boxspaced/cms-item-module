@@ -1,33 +1,33 @@
 <?php
-namespace Item\Service;
+namespace Boxspaced\CmsItemModule\Service;
 
 use DateTime;
 use Zend\Cache\Storage\Adapter\AbstractAdapter as Cache;
 use Zend\Log\Logger;
 use Zend\Authentication\AuthenticationService;
 use Boxspaced\EntityManager\EntityManager;
-use Item\Model;
+use Boxspaced\CmsItemModule\Model;
 use Zend\Filter\StaticFilter;
 use Zend\Filter\Word\DashToCamelCase;
 use Zend_Search_Lucene as Search;
 use Zend_Search_Lucene_Document as SearchDocument;
 use Zend_Search_Lucene_Field as SearchField;
 use utilphp\util as Util;
-use Item\Exception;
-use Account\Model\UserRepository;
-use Slug\Model\Route;
-use Core\Model\ModuleRepository;
-use Block\Model\BlockRepository;
-use Menu\Model\MenuRepository;
-use Slug\Model\RouteRepository;
-use Versioning\Model\VersioningService;
-use Workflow\Model\WorkflowService;
-use Core\Model\EntityFactory;
-use Account\Model\User;
-use Versioning\Model\VersionableInterface;
-use Menu\Model\MenuItem;
-use Menu\Service\MenuService;
-use Core\Model\ProvisionalLocation as ProvisionalLocationEntity;
+use Boxspaced\CmsItemModule\Exception;
+use Boxspaced\CmsAccountModule\Model\UserRepository;
+use Boxspaced\CmsSlugModule\Model\Route;
+use Boxspaced\CmsCoreModule\Model\ModuleRepository;
+use Boxspaced\CmsBlockModule\Model\BlockRepository;
+use Boxspaced\CmsMenuModule\Model\MenuRepository;
+use Boxspaced\CmsSlugModule\Model\RouteRepository;
+use Boxspaced\CmsVersioningModule\Model\VersioningService;
+use Boxspaced\CmsWorkflowModule\Model\WorkflowService;
+use Boxspaced\CmsCoreModule\Model\EntityFactory;
+use Boxspaced\CmsAccountModule\Model\User;
+use Boxspaced\CmsVersioningModule\Model\VersionableInterface;
+use Boxspaced\CmsMenuModule\Model\MenuItem;
+use Boxspaced\CmsMenuModule\Service\MenuService;
+use Boxspaced\CmsCoreModule\Model\ProvisionalLocation as ProvisionalLocationEntity;
 
 class ItemService
 {

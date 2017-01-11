@@ -1,9 +1,9 @@
 <?php
-namespace Item\Model;
+namespace Boxspaced\CmsItemModule\Model;
 
 use DateTime;
-use Versioning\Model\VersionableInterface;
-use Account\Model\User;
+use Boxspaced\CmsVersioningModule\Model\VersionableInterface;
+use Boxspaced\CmsAccountModule\Model\User;
 
 class VersionableItem implements VersionableInterface
 {

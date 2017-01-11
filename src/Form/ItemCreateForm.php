@@ -1,9 +1,9 @@
 <?php
-namespace Item\Form;
+namespace Boxspaced\CmsItemModule\Form;
 
 use Zend\Form\Form;
 use Zend\Form\Element;
-use Item\Service\ItemService;
+use Boxspaced\CmsItemModule\Service\ItemService;
 use Zend\InputFilter\InputFilter;
 use Zend\Validator;
 use Zend\Filter;

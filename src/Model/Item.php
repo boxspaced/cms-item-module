@@ -1,12 +1,12 @@
 <?php
-namespace Item\Model;
+namespace Boxspaced\CmsItemModule\Model;
 
 use DateTime;
 use Boxspaced\EntityManager\Entity\AbstractEntity;
 use Boxspaced\EntityManager\Collection\Collection;
-use Account\Model\User;
-use Slug\Model\Route;
-use Core\Model\ProvisionalLocation;
+use Boxspaced\CmsAccountModule\Model\User;
+use Boxspaced\CmsSlugModule\Model\Route;
+use Boxspaced\CmsCoreModule\Model\ProvisionalLocation;
 
 class Item extends AbstractEntity
 {

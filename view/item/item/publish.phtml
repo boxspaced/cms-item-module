@@ -1,3 +1,6 @@
+<?php
+use Boxspaced\CmsItemModule\Service\ItemService;
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en">
     <head>
@@ -167,7 +170,7 @@
                         echo $this->adminFormElement($form->get('to'));
                         ?>
 
-                        <?php if ($form->get('to')->getValue() === \Item\Service\ItemService::PUBLISH_TO_MENU) : ?>
+                        <?php if ($form->get('to')->getValue() === ItemService::PUBLISH_TO_MENU) : ?>
                         <?php echo $this->adminFormElement($form->get('beneathMenuItemId')); ?>
                         <?php endif; ?>
 

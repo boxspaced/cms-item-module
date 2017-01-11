@@ -1,7 +1,7 @@
 <?php
-namespace Item\Model;
+namespace Boxspaced\CmsItemModule\Model;
 
-use Workflow\Model\WorkflowableInterface;
+use Boxspaced\CmsWorkflowModule\Model\WorkflowableInterface;
 
 class WorkflowableItem implements WorkflowableInterface
 {

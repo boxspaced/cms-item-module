@@ -1,9 +1,9 @@
 <?php
-namespace Item\Controller\Plugin;
+namespace Boxspaced\CmsItemModule\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\View\Model\ViewModel;
-use Item\Service;
+use Boxspaced\CmsItemModule\Service;
 
 class ItemBlocks extends AbstractPlugin
 {
