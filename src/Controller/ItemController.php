@@ -83,7 +83,6 @@ class ItemController extends AbstractActionController
         $this->previewSession = new SessionContainer('preview');
 
         $this->view = new ViewModel();
-        //$this->view->from = $this->params()->fromQuery('from'); // @todo check still works
     }
 
     /**
@@ -141,8 +140,7 @@ class ItemController extends AbstractActionController
             $itemId = $this->params()->fromQuery('contentId') ?: $id;
             $item = $this->itemService->getItem($itemId);
 
-            // @todo module name constant shouldn't be coming from service,
-            // inject module service possibly and have a getModule()->name (DTO)
+            // @todo module name constant shouldn't be coming from service
             if ($this->workflowService->getStatus(Service\ItemService::MODULE_NAME, $id) === WorkflowService::WORKFLOW_STATUS_NEW) {
 
                 if ($this->params()->fromQuery('templateId')) {

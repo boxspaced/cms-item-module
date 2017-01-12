@@ -42,7 +42,7 @@ class ItemAdminWidget extends AbstractPlugin
     public function __invoke(DateTime $liveFrom = null, DateTime $expiresEnd = null, $typeName = null)
     {
         if (0 === func_num_args()) {
-            // @todo remove as only done so we can access the calc* methods
+            // @todo remove as only done so we can access the calc* methods and they should be view helpers
             return $this;
         }
 
