@@ -92,6 +92,7 @@
                             <?php endforeach; ?>
                             <?php endif; ?>
 
+                            <?php if ($form->has('parts')) : ?>
                             <?php if ($this->multipleParts) : ?>
                             <div id="ib_container" class="ib-container yui-navset">
 
@@ -134,6 +135,7 @@
                             <?php if ($this->multipleParts) : ?>
                                 </div>
                             </div>
+                            <?php endif; ?>
                             <?php endif; ?>
                         </div>
 
