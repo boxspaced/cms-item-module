@@ -2,8 +2,6 @@
 namespace Boxspaced\CmsItemModule;
 
 use Boxspaced\EntityManager\Entity\AbstractEntity;
-use Boxspaced\EntityManager\Mapper\Conditions;
-use Boxspaced\EntityManagerModule\Mapper\ConditionsFactory;
 use Zend\Router\Http\Segment;
 use Boxspaced\CmsCoreModule\Model\RepositoryFactory;
 use Boxspaced\CmsSlugModule\Model\Route;
@@ -192,78 +190,18 @@ return [
                     'one_to_many' => [
                         'fields' => [
                             'type' => Model\ItemField::class,
-                            'conditions' => [
-                                'factory' => ConditionsFactory::class,
-                                'options' => [
-                                    'constraints' => [
-                                        [
-                                            'field' => 'parent_item.id',
-                                            'operation' => 'eq',
-                                            'value' => ':id',
-                                        ],
-                                    ],
-                                ],
-                            ],
                         ],
                         'parts' => [
                             'type' => Model\ItemPart::class,
-                            'conditions' => [
-                                'factory' => ConditionsFactory::class,
-                                'options' => [
-                                    'constraints' => [
-                                        [
-                                            'field' => 'parent_item.id',
-                                            'operation' => 'eq',
-                                            'value' => ':id',
-                                        ],
-                                    ],
-                                ],
-                            ],
                         ],
                         'notes' => [
                             'type' => Model\ItemNote::class,
-                            'conditions' => [
-                                'factory' => ConditionsFactory::class,
-                                'options' => [
-                                    'constraints' => [
-                                        [
-                                            'field' => 'parent_item.id',
-                                            'operation' => 'eq',
-                                            'value' => ':id',
-                                        ],
-                                    ],
-                                ],
-                            ],
                         ],
                         'free_blocks' => [
                             'type' => Model\ItemFreeBlock::class,
-                            'conditions' => [
-                                'factory' => ConditionsFactory::class,
-                                'options' => [
-                                    'constraints' => [
-                                        [
-                                            'field' => 'parent_item.id',
-                                            'operation' => 'eq',
-                                            'value' => ':id',
-                                        ],
-                                    ],
-                                ],
-                            ],
                         ],
                         'block_sequences' => [
                             'type' => Model\ItemBlockSequence::class,
-                            'conditions' => [
-                                'factory' => ConditionsFactory::class,
-                                'options' => [
-                                    'constraints' => [
-                                        [
-                                            'field' => 'parent_item.id',
-                                            'operation' => 'eq',
-                                            'value' => ':id',
-                                        ],
-                                    ],
-                                ],
-                            ],
                         ],
                     ],
                 ],
@@ -295,33 +233,9 @@ return [
                     'one_to_many' => [
                         'templates' => [
                             'type' => Model\ItemTemplate::class,
-                            'conditions' => [
-                                'factory' => ConditionsFactory::class,
-                                'options' => [
-                                    'constraints' => [
-                                        [
-                                            'field' => 'for_type.id',
-                                            'operation' => 'eq',
-                                            'value' => ':id',
-                                        ],
-                                    ],
-                                ],
-                            ],
                         ],
                         'teaser_templates' => [
                             'type' => Model\ItemTeaserTemplate::class,
-                            'conditions' => [
-                                'factory' => ConditionsFactory::class,
-                                'options' => [
-                                    'constraints' => [
-                                        [
-                                            'field' => 'for_type.id',
-                                            'operation' => 'eq',
-                                            'value' => ':id',
-                                        ],
-                                    ],
-                                ],
-                            ],
                         ],
                     ],
                 ],
@@ -376,18 +290,6 @@ return [
                     'one_to_many' => [
                         'fields' => [
                             'type' => Model\ItemPartField::class,
-                            'conditions' => [
-                                'factory' => ConditionsFactory::class,
-                                'options' => [
-                                    'constraints' => [
-                                        [
-                                            'field' => 'parent_part.id',
-                                            'operation' => 'eq',
-                                            'value' => ':id',
-                                        ],
-                                    ],
-                                ],
-                            ],
                         ],
                     ],
                 ],
@@ -478,18 +380,6 @@ return [
                     'one_to_many' => [
                         'blocks' => [
                             'type' => Model\ItemTemplateBlock::class,
-                            'conditions' => [
-                                'factory' => ConditionsFactory::class,
-                                'options' => [
-                                    'constraints' => [
-                                        [
-                                            'field' => 'parent_template.id',
-                                            'operation' => 'eq',
-                                            'value' => ':id',
-                                        ],
-                                    ],
-                                ],
-                            ],
                         ],
                     ],
                 ],
@@ -605,24 +495,6 @@ return [
                     'one_to_many' => [
                         'blocks' => [
                             'type' => Model\ItemBlockSequenceBlock::class,
-                            'conditions' => [
-                                'factory' => ConditionsFactory::class,
-                                'options' => [
-                                    'constraints' => [
-                                        [
-                                            'field' => 'parent_block_sequence.id',
-                                            'operation' => 'eq',
-                                            'value' => ':id',
-                                        ],
-                                    ],
-                                    'ordering' => [
-                                        [
-                                            'field' => 'order_by',
-                                            'direction' => Conditions::ORDER_ASC,
-                                        ],
-                                    ],
-                                ],
-                            ],
                         ],
                     ],
                 ],

@@ -66,7 +66,12 @@ class ItemBlockSequence extends AbstractEntity
      */
     public function getBlocks()
     {
-        return $this->get('blocks');
+        return $this->get('blocks')->sort(function(
+            ItemBlockSequenceBlock $a,
+            ItemBlockSequenceBlock $b
+        ) {
+            return $a->getOrderBy() - $b->getOrderBy();
+        });
     }
 
     /**
