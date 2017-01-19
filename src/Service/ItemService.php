@@ -952,7 +952,11 @@ class ItemService
         $menu = $this->menuRepository->getByName('main');
 
         // Calculate order by
-        $existingTopLevel = $menu->getItems();
+        $existingTopLevel = $menu->getItems()->filter(
+            function(MenuItem $menuItem) {
+                return null === $menuItem->getParentMenuItem();
+            }
+        );
         if (count($existingTopLevel)) {
             $orderBy = $existingTopLevel->last()->getOrderBy() + 1;
         } else {
@@ -1164,7 +1168,13 @@ class ItemService
         $flattened = [];
 
         $menu = $this->menuRepository->getByName('main');
-        $this->flattenMenuRecursive($menu->getItems(), $flattened);
+
+        // @todo this needs optimizing as menu items already come flattened from Menu::getItems
+        $this->flattenMenuRecursive($menu->getItems()->filter(
+            function(MenuItem $menuItem) {
+                return null === $menuItem->getParentMenuItem();
+            }
+        ), $flattened);
 
         return $flattened;
     }
