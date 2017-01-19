@@ -50,16 +50,16 @@ class ItemRepository
     {
         $now = new DateTime();
 
-        $conditions = $this->entityManager->createConditions();
-        $conditions->field('status')->eq(VersionableInterface::STATUS_PUBLISHED);
-        $conditions->field('live_from')->lt($now);
-        $conditions->field('expires_end')->gt($now);
+        $query = $this->entityManager->createQuery();
+        $query->field('status')->eq(VersionableInterface::STATUS_PUBLISHED);
+        $query->field('live_from')->lt($now);
+        $query->field('expires_end')->gt($now);
 
         if (null !== $offset && null !== $showPerPage) {
-            $conditions->paging($offset, $showPerPage);
+            $query->paging($offset, $showPerPage);
         }
 
-        return $this->entityManager->findAll(Item::class, $conditions);
+        return $this->entityManager->findAll(Item::class, $query);
     }
 
     /**  *
@@ -68,10 +68,10 @@ class ItemRepository
      */
     public function getAllVersionOf($versionOfId)
     {
-        $conditions = $this->entityManager->createConditions();
-        $conditions->field('version_of.id')->eq($versionOfId);
+        $query = $this->entityManager->createQuery();
+        $query->field('version_of.id')->eq($versionOfId);
 
-        return $this->entityManager->findAll(Item::class, $conditions);
+        return $this->entityManager->findAll(Item::class, $query);
     }
 
     /**
