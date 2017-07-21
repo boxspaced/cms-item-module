@@ -1,284 +1,263 @@
 <?php
 use Boxspaced\CmsItemModule\Service\ItemService;
+
+if ($this->preview) :
+
+    $url = $this->url('content', ['slug' => $this->itemName], [
+        'query' => [
+            'preview' => 'publishing',
+        ],
+    ]);
+
+    $this->inlineScript()->appendScript("open_preview('{$url}')");
+
+endif;
+
+$script = <<<SCRIPT
+var input1 = document.getElementById('live-from');
+var cal1 = new calendar(input1);
+cal1.year_scroll = true;
+cal1.time_comp = true;
+var input2 = document.getElementById('expires-end');
+var cal2 = new calendar(input2);
+cal2.year_scroll = true;
+cal2.time_comp = true;
+SCRIPT;
+$this->inlineScript()->appendScript($script);
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title></title>
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <link rel="stylesheet" type="text/css" href="/css/admin.css" />
-        <script type="text/javascript" src="/js/admin.js"></script>
-    </head>
 
-    <body class="yui-skin-sam" onload="<?php if ($this->preview) : ?>open_preview('<?php echo $this->url('content', ['slug' => $this->itemName], ['query' => ['preview' => 'publishing']]); ?>')<?php endif; ?>">
+        <div class="row">
+            <div class="col-md-12">
 
-        <div id="top"><!-- Start top area -->
+                <h1>Publish:
+                <?php echo $this->escapeHtml($this->typeName) ?> - <i><?php echo $this->escapeHtml($this->itemName) ?></i></h1>
 
-            <div class="title">Publish:
-                <?php echo $this->escapeHtml($this->typeName) ?> - <i><?php echo $this->escapeHtml($this->itemName) ?></i></div>
-            <?php echo $this->messages() ?>
-            <div class="info"><img src="/images/required_star.png" alt="Required"> indicates required field</div>
-
-        </div><!-- End top area -->
-
-        <?php
-        $form = $this->form;
-        $form->setAttribute('name', 'main')->prepare();
-        ?>
-
-        <?php echo $this->form()->openTag($form) ?>
-
-            <?php echo $this->adminFormElement($form->get('from')) ?>
-            <?php echo $this->adminFormElement($form->get('id')) ?>
-            <?php echo $this->adminFormElement($form->get('partial')) ?>
-            <?php echo $this->adminFormElement($form->get('token')) ?>
-
-            <div id="stage"><!-- Start stage area -->
-
-                <div class="white-box"><!-- Start fieldset -->
-                    <div class="white-box-rounded-corner-top"><div></div></div>
-                    <div class="white-box-content">
-                        <div class="white-box-title">Notes</div>
-                        <p>
-                            <?php if (empty($this->itemNotes)) : ?>
-                                No notes found
-                            <?php else : ?>
-                                <?php foreach ($this->itemNotes as $note) : ?>
-                                    <?php
-                                    echo $this->date($note->time, 'F j Y H:i') . ' - ' .
-                                    $this->escapeHtml($note->username) . ' - ' .
-                                    $this->escapeHtml($note->text)
-                                    ?><br />
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                        </p>
-                    </div>
-                </div><!-- End fieldset -->
-
-                <div class="white-box"><!-- Start fieldset -->
-                    <div class="white-box-rounded-corner-top"><div></div></div>
-                    <div class="white-box-content">
-                        <div class="white-box-title">Lifespan</div>
-
-                        <?php echo $this->adminFormElement($form->get('liveFrom')) ?>
-                        <div style="position: relative; top: -38px; left: 315px;">
-                            <a href="javascript:cal1.popup();"><img src="/images/icons/calendar.png" width="16" height="16" border="0"
-                                 title="Pick date/time" alt="Pick date/time"></a> or <a href="javascript:set_field_value('main', 'liveFrom',
-                              '<?php echo date('Y-m-d') ?> 00:00:00');">Immediately</a></div>
-
-                        <?php echo $this->adminFormElement($form->get('expiresEnd')) ?>
-                        <div style="position: relative; top: -38px; left: 315px;">
-                        <a href="javascript:cal2.popup();"><img src="/images/icons/calendar.png" width="16" height="16" border="0"
-                             title="Pick date/time" alt="Pick date/time"></a> or <a href="javascript:set_field_value('main', 'expiresEnd',
-                           '2038-01-19 00:00:00');">Never</a></div>
-
-                    </div>
-                </div><!-- End fieldset -->
-
-                <div class="white-box"><!-- Start fieldset -->
-                    <div class="white-box-rounded-corner-top"><div></div></div>
-                    <div class="white-box-content">
-                        <div class="white-box-title">Settings</div>
-
-                            <?php echo $this->adminFormElement($form->get('name')) ?>
-                            <?php echo $this->adminFormElement($form->get('colourScheme')) ?>
-
-                            <?php
-                            if ($this->teaserTemplateDescription) :
-                                $currentDesc = $form->get('teaserTemplateId')->getOption('description');
-                                $form->get('teaserTemplateId')->setOption('description', $currentDesc . $this->teaserTemplateDescription);
-                            endif;
-                            if (count($form->get('teaserTemplateId')->getValueOptions()) > 1) :
-                                echo $this->adminFormElement($form->get('teaserTemplateId'));
-                            else :
-                                echo $this->formHidden($form->get('teaserTemplateId'));
-                            endif;
-                            ?>
-
-                            <?php
-                            $form->get('templateId')->setAttribute('onChange', 'submit_partial(this.form)');
-                            if ($this->templateDescription) :
-                                $currentDesc = $form->get('templateId')->getOption('description');
-                                $form->get('templateId')->setOption('description', $currentDesc . $this->templateDescription);
-                            endif;
-                            if (count($form->get('templateId')->getValueOptions()) > 1) :
-                                echo $this->adminFormElement($form->get('templateId'));
-                            else :
-                                echo $this->formHidden($form->get('templateId'));
-                            endif;
-                            ?>
-                    </div>
-                </div><!-- End fieldset -->
-
-                <div class="white-box"><!-- Start fieldset -->
-                    <div class="white-box-rounded-corner-top"><div></div></div>
-                    <div class="white-box-content">
-                        <div class="white-box-title">Location</div>
-
-                        <?php
-                        if (null !== $this->provisionalTo) :
-                            $useProvisional = $form->get('useProvisional');
-                            $useProvisional->setAttribute('onChange', 'submit_partial(this.form)');
-                            $useProvisional->setChecked(true);
-                            echo $this->adminFormElement($useProvisional);
-                        endif;
-                        ?>
-
-                        <?php if ($form->get('useProvisional')->isChecked()) : ?>
-                        <div class="form-element">
-                            <label class="lined-up optional">To</label>
-                            <div class="form-inputs line-up">
-                                <?php echo $this->escapeHtml($this->provisionalTo) ?>
-                            </div>
-                        </div>
-                        <?php if ($this->provisionalBeneathMenuItem) : ?>
-                        <div class="form-element">
-                            <label class="lined-up optional">Menu position</label>
-                            <div class="form-inputs line-up">
-                                <?php echo $this->escapeHtml($this->provisionalBeneathMenuItem) ?>
-                                <?php if ($this->provisionalBeneathMenuItem !== 'Top level') : ?>
-                                <-- Beneath
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <?php endif; ?>
-                        <?php endif; ?>
-
-                        <?php if (!$form->get('useProvisional')->isChecked()) : ?>
-
-                        <?php
-                        $form->get('to')->setAttribute('onChange', 'submit_partial(this.form)');
-                        echo $this->adminFormElement($form->get('to'));
-                        ?>
-
-                        <?php if ($form->get('to')->getValue() === ItemService::PUBLISH_TO_MENU) : ?>
-                        <?php echo $this->adminFormElement($form->get('beneathMenuItemId')); ?>
-                        <?php endif; ?>
-
-                        <?php endif; ?>
-
-                    </div>
-                </div><!-- End fieldset -->
+                <div class="info">
+                    <img src="/images/required_star.png" alt="Required"> indicates required field
+                </div>
 
                 <?php
-                $freeBlocks = $form->get('freeBlocks')->getFieldsets();
-                $blockSequences = $form->get('blockSequences')->getFieldsets();
+                $form = $this->form;
+                $form->setAttribute('name', 'main')->prepare();
                 ?>
 
-                <?php if ($freeBlocks || $blockSequences) : ?>
-                <div class="white-box"><!-- Start fieldset -->
-                    <div class="white-box-rounded-corner-top"><div></div></div>
-                    <div class="white-box-content">
-                        <div class="white-box-title">Blocks</div>
+                <?php echo $this->form()->openTag($form) ?>
 
-                        <?php foreach ($freeBlocks as $freeBlock) : ?>
-                        <div class="form-element">
-                            <label class="lined-up"><?php echo $freeBlock->getLabel() ?></label>
-                            <div class="form-inputs line-up">
-                                <table class="table" style="background-color: #ffffff;">
-                                    <thead>
-                                        <tr>
-                                            <th>Block</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <?php echo $this->formElement($freeBlock->get('id')); ?>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <?php endforeach; ?>
+                    <?php echo $this->adminFormElement($form->get('from')) ?>
+                    <?php echo $this->adminFormElement($form->get('id')) ?>
+                    <?php echo $this->adminFormElement($form->get('partial')) ?>
+                    <?php echo $this->adminFormElement($form->get('token')) ?>
 
-                        <?php foreach ($blockSequences as $blockSequence) : ?>
-
-                        <?php
-
-                        $idOptions = [];
-
-                        foreach ($form->getBlockValueOptions() as $blockTypeName => $options) {
-                            foreach ($options['options'] as $value => $label) {
-                                $idOptions[$value] = $blockTypeName . ' ' . $label;
-                            }
-                        }
-
-                        $idNameTpl = $blockSequence->getName() . '[blocks][#][id]';
-                        $orderByNameTpl = $blockSequence->getName() . '[blocks][#][orderBy]';
-                        $numCurrentBlocksName = $blockSequence->getName() . '[numCurrentBlocks]';
-                        $numNewBlocksName = $blockSequence->getName() . '[numNewBlocks]';
-                        ?>
-
-                        <div class="form-element">
-                            <label class="lined-up"><?php echo $blockSequence->getLabel() ?></label>
-                            <div class="form-inputs line-up">
-                                <table class="table" style="background-color: #ffffff;" id="<?php echo $this->adminFormElement()->nameToId($blockSequence->getName()) . '-en'; ?>">
-                                    <thead>
-                                        <tr>
-                                            <th>Block</th>
-                                            <th colspan="3">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-
-                                <script type="text/javascript">
-
-                                    <?php foreach ($blockSequence->get('blocks') as $sequenceBlock) : ?>
-
-                                    addRow(
-                                    'saved',
-                                    '<?php echo $this->adminFormElement()->nameToId($blockSequence->getName()) . '-en'; ?>',
-                                    [
-                                        '<?php echo $orderByNameTpl; ?>',
-                                        '<?php echo $this->escapeJs($sequenceBlock->get('orderBy')->getValue()); ?>'
-                                    ],
-                                    [
-                                        [
-                                            'createBlockIdSelect',
-                                            '<?php echo $idNameTpl; ?>',
-                                            '<?php echo $this->escapeJs($sequenceBlock->get('id')->getValue()); ?>',
-                                            [['', '']
-                                            <?php foreach ($idOptions as $value => $label) : ?>
-                                            ,['<?php echo $this->escapeJs($value); ?>', '<?php echo $this->escapeJs($label); ?>']
-                                            <?php endforeach; ?>],
-                                            false
-                                        ]
-                                    ],
-                                    '<?php echo $this->adminFormElement()->nameToId($numCurrentBlocksName); ?>',
-                                    '<?php echo $this->adminFormElement()->nameToId($numNewBlocksName); ?>',
-                                    'en',
-                                    'en',
-                                    ['en']);
-
+                    <div class="white-box"><!-- Start fieldset -->
+                        <div class="white-box-rounded-corner-top"><div></div></div>
+                        <div class="white-box-content">
+                            <div class="white-box-title">Notes</div>
+                            <p>
+                                <?php if (empty($this->itemNotes)) : ?>
+                                    No notes found
+                                <?php else : ?>
+                                    <?php foreach ($this->itemNotes as $note) : ?>
+                                        <?php
+                                        echo $this->date($note->time, 'F j Y H:i') . ' - ' .
+                                        $this->escapeHtml($note->username) . ' - ' .
+                                        $this->escapeHtml($note->text)
+                                        ?><br />
                                     <?php endforeach; ?>
+                                <?php endif; ?>
+                            </p>
+                        </div>
+                    </div><!-- End fieldset -->
 
-                                    sortTable('<?php echo $this->adminFormElement()->nameToId($blockSequence->getName()) . '-en'; ?>', 0, 0, 'numeric', 'ASC');
-                                </script>
+                    <div class="white-box"><!-- Start fieldset -->
+                        <div class="white-box-rounded-corner-top"><div></div></div>
+                        <div class="white-box-content">
+                            <div class="white-box-title">Lifespan</div>
 
-                                <p><a class="link" href="javascript:void(0)" onclick="addBlankRow(
+                            <?php echo $this->adminFormElement($form->get('liveFrom')) ?>
+                            <div style="position: relative; top: -38px; left: 315px;">
+                                <a href="javascript:cal1.popup();"><img src="/images/icons/calendar.png" width="16" height="16" border="0"
+                                     title="Pick date/time" alt="Pick date/time"></a> or <a href="javascript:set_field_value('main', 'liveFrom',
+                                  '<?php echo date('Y-m-d') ?> 00:00:00');">Immediately</a></div>
+
+                            <?php echo $this->adminFormElement($form->get('expiresEnd')) ?>
+                            <div style="position: relative; top: -38px; left: 315px;">
+                            <a href="javascript:cal2.popup();"><img src="/images/icons/calendar.png" width="16" height="16" border="0"
+                                 title="Pick date/time" alt="Pick date/time"></a> or <a href="javascript:set_field_value('main', 'expiresEnd',
+                               '2038-01-19 00:00:00');">Never</a></div>
+
+                        </div>
+                    </div><!-- End fieldset -->
+
+                    <div class="white-box"><!-- Start fieldset -->
+                        <div class="white-box-rounded-corner-top"><div></div></div>
+                        <div class="white-box-content">
+                            <div class="white-box-title">Settings</div>
+
+                                <?php echo $this->adminFormElement($form->get('name')) ?>
+                                <?php echo $this->adminFormElement($form->get('colourScheme')) ?>
+
+                                <?php
+                                if ($this->teaserTemplateDescription) :
+                                    $currentDesc = $form->get('teaserTemplateId')->getOption('description');
+                                    $form->get('teaserTemplateId')->setOption('description', $currentDesc . $this->teaserTemplateDescription);
+                                endif;
+                                if (count($form->get('teaserTemplateId')->getValueOptions()) > 1) :
+                                    echo $this->adminFormElement($form->get('teaserTemplateId'));
+                                else :
+                                    echo $this->formHidden($form->get('teaserTemplateId'));
+                                endif;
+                                ?>
+
+                                <?php
+                                $form->get('templateId')->setAttribute('onChange', 'submit_partial(this.form)');
+                                if ($this->templateDescription) :
+                                    $currentDesc = $form->get('templateId')->getOption('description');
+                                    $form->get('templateId')->setOption('description', $currentDesc . $this->templateDescription);
+                                endif;
+                                if (count($form->get('templateId')->getValueOptions()) > 1) :
+                                    echo $this->adminFormElement($form->get('templateId'));
+                                else :
+                                    echo $this->formHidden($form->get('templateId'));
+                                endif;
+                                ?>
+                        </div>
+                    </div><!-- End fieldset -->
+
+                    <div class="white-box"><!-- Start fieldset -->
+                        <div class="white-box-rounded-corner-top"><div></div></div>
+                        <div class="white-box-content">
+                            <div class="white-box-title">Location</div>
+
+                            <?php
+                            if (null !== $this->provisionalTo) :
+                                $useProvisional = $form->get('useProvisional');
+                                $useProvisional->setAttribute('onChange', 'submit_partial(this.form)');
+                                $useProvisional->setChecked(true);
+                                echo $this->adminFormElement($useProvisional);
+                            endif;
+                            ?>
+
+                            <?php if ($form->get('useProvisional')->isChecked()) : ?>
+                            <div class="form-element">
+                                <label class="lined-up optional">To</label>
+                                <div class="form-inputs line-up">
+                                    <?php echo $this->escapeHtml($this->provisionalTo) ?>
+                                </div>
+                            </div>
+                            <?php if ($this->provisionalBeneathMenuItem) : ?>
+                            <div class="form-element">
+                                <label class="lined-up optional">Menu position</label>
+                                <div class="form-inputs line-up">
+                                    <?php echo $this->escapeHtml($this->provisionalBeneathMenuItem) ?>
+                                    <?php if ($this->provisionalBeneathMenuItem !== 'Top level') : ?>
+                                    <-- Beneath
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                            <?php endif; ?>
+
+                            <?php if (!$form->get('useProvisional')->isChecked()) : ?>
+
+                            <?php
+                            $form->get('to')->setAttribute('onChange', 'submit_partial(this.form)');
+                            echo $this->adminFormElement($form->get('to'));
+                            ?>
+
+                            <?php if ($form->get('to')->getValue() === ItemService::PUBLISH_TO_MENU) : ?>
+                            <?php echo $this->adminFormElement($form->get('beneathMenuItemId')); ?>
+                            <?php endif; ?>
+
+                            <?php endif; ?>
+
+                        </div>
+                    </div><!-- End fieldset -->
+
+                    <?php
+                    $freeBlocks = $form->get('freeBlocks')->getFieldsets();
+                    $blockSequences = $form->get('blockSequences')->getFieldsets();
+                    ?>
+
+                    <?php if ($freeBlocks || $blockSequences) : ?>
+                    <div class="white-box"><!-- Start fieldset -->
+                        <div class="white-box-rounded-corner-top"><div></div></div>
+                        <div class="white-box-content">
+                            <div class="white-box-title">Blocks</div>
+
+                            <?php foreach ($freeBlocks as $freeBlock) : ?>
+                            <div class="form-element">
+                                <label class="lined-up"><?php echo $freeBlock->getLabel() ?></label>
+                                <div class="form-inputs line-up">
+                                    <table class="table" style="background-color: #ffffff;">
+                                        <thead>
+                                            <tr>
+                                                <th>Block</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <?php echo $this->formElement($freeBlock->get('id')); ?>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <?php endforeach; ?>
+
+                            <?php foreach ($blockSequences as $blockSequence) : ?>
+
+                            <?php
+
+                            $idOptions = [];
+
+                            foreach ($form->getBlockValueOptions() as $blockTypeName => $options) {
+                                foreach ($options['options'] as $value => $label) {
+                                    $idOptions[$value] = $blockTypeName . ' ' . $label;
+                                }
+                            }
+
+                            $idNameTpl = $blockSequence->getName() . '[blocks][#][id]';
+                            $orderByNameTpl = $blockSequence->getName() . '[blocks][#][orderBy]';
+                            $numCurrentBlocksName = $blockSequence->getName() . '[numCurrentBlocks]';
+                            $numNewBlocksName = $blockSequence->getName() . '[numNewBlocks]';
+                            ?>
+
+                            <div class="form-element">
+                                <label class="lined-up"><?php echo $blockSequence->getLabel() ?></label>
+                                <div class="form-inputs line-up">
+                                    <table class="table" style="background-color: #ffffff;" id="<?php echo $this->adminFormElement()->nameToId($blockSequence->getName()) . '-en'; ?>">
+                                        <thead>
+                                            <tr>
+                                                <th>Block</th>
+                                                <th colspan="3">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+
+                                    <script type="text/javascript">
+
+                                        <?php foreach ($blockSequence->get('blocks') as $sequenceBlock) : ?>
+
+                                        addRow(
+                                        'saved',
                                         '<?php echo $this->adminFormElement()->nameToId($blockSequence->getName()) . '-en'; ?>',
-                                        20,
                                         [
                                             '<?php echo $orderByNameTpl; ?>',
-                                            ''
+                                            '<?php echo $this->escapeJs($sequenceBlock->get('orderBy')->getValue()); ?>'
                                         ],
                                         [
                                             [
                                                 'createBlockIdSelect',
                                                 '<?php echo $idNameTpl; ?>',
-                                                '',
-                                                [
-                                                    ['', '']
-                                                    <?php foreach ($idOptions as $value => $label) : ?>
-                                                    ,['<?php echo $this->escapeJs($value); ?>', '<?php echo $this->escapeJs($label); ?>']
-                                                    <?php endforeach; ?>
-                                                ],
+                                                '<?php echo $this->escapeJs($sequenceBlock->get('id')->getValue()); ?>',
+                                                [['', '']
+                                                <?php foreach ($idOptions as $value => $label) : ?>
+                                                ,['<?php echo $this->escapeJs($value); ?>', '<?php echo $this->escapeJs($label); ?>']
+                                                <?php endforeach; ?>],
                                                 false
                                             ]
                                         ],
@@ -286,58 +265,75 @@ use Boxspaced\CmsItemModule\Service\ItemService;
                                         '<?php echo $this->adminFormElement()->nameToId($numNewBlocksName); ?>',
                                         'en',
                                         'en',
-                                        ['en']);">Add block</a></p>
+                                        ['en']);
 
-                                <input type="hidden" name="<?php echo $numCurrentBlocksName; ?>" value="<?php echo count($blockSequence->get('blocks')); ?>" id="<?php echo $this->adminFormElement()->nameToId($numCurrentBlocksName); ?>">
-                                <input type="hidden" name="<?php echo $numNewBlocksName; ?>" value="0" id="<?php echo $this->adminFormElement()->nameToId($numNewBlocksName); ?>">
+                                        <?php endforeach; ?>
 
+                                        sortTable('<?php echo $this->adminFormElement()->nameToId($blockSequence->getName()) . '-en'; ?>', 0, 0, 'numeric', 'ASC');
+                                    </script>
+
+                                    <p><a class="link" href="javascript:void(0)" onclick="addBlankRow(
+                                            '<?php echo $this->adminFormElement()->nameToId($blockSequence->getName()) . '-en'; ?>',
+                                            20,
+                                            [
+                                                '<?php echo $orderByNameTpl; ?>',
+                                                ''
+                                            ],
+                                            [
+                                                [
+                                                    'createBlockIdSelect',
+                                                    '<?php echo $idNameTpl; ?>',
+                                                    '',
+                                                    [
+                                                        ['', '']
+                                                        <?php foreach ($idOptions as $value => $label) : ?>
+                                                        ,['<?php echo $this->escapeJs($value); ?>', '<?php echo $this->escapeJs($label); ?>']
+                                                        <?php endforeach; ?>
+                                                    ],
+                                                    false
+                                                ]
+                                            ],
+                                            '<?php echo $this->adminFormElement()->nameToId($numCurrentBlocksName); ?>',
+                                            '<?php echo $this->adminFormElement()->nameToId($numNewBlocksName); ?>',
+                                            'en',
+                                            'en',
+                                            ['en']);">Add block</a></p>
+
+                                    <input type="hidden" name="<?php echo $numCurrentBlocksName; ?>" value="<?php echo count($blockSequence->get('blocks')); ?>" id="<?php echo $this->adminFormElement()->nameToId($numCurrentBlocksName); ?>">
+                                    <input type="hidden" name="<?php echo $numNewBlocksName; ?>" value="0" id="<?php echo $this->adminFormElement()->nameToId($numNewBlocksName); ?>">
+
+                                </div>
+                                <div class="clear"></div>
                             </div>
-                            <div class="clear"></div>
+                            <?php endforeach; ?>
+
                         </div>
-                        <?php endforeach; ?>
+                    </div><!-- End fieldset -->
+                    <?php endif; ?>
+
+                    <div class="submit-area">
+
+                        <div class="form-element">
+                            <div class="form-inputs line-up">
+                                <?php
+                                $form->get('preview')->setAttribute('class', 'button');
+                                echo $this->formElement($form->get('preview'));
+                                ?>
+                            </div>
+                        </div>
+
+                        <div class="form-element">
+                            <div class="form-inputs line-up">
+                                <?php
+                                $form->get('publish')->setAttribute('class', 'button');
+                                echo $this->formElement($form->get('publish'));
+                                ?>
+                            </div>
+                        </div>
 
                     </div>
-                </div><!-- End fieldset -->
-                <?php endif; ?>
 
-            </div><!-- End stage area -->
-
-            <div class="submit-area">
-
-                <div class="form-element">
-                    <div class="form-inputs line-up">
-                        <?php
-                        $form->get('preview')->setAttribute('class', 'button');
-                        echo $this->formElement($form->get('preview'));
-                        ?>
-                    </div>
-                </div>
-
-                <div class="form-element">
-                    <div class="form-inputs line-up">
-                        <?php
-                        $form->get('publish')->setAttribute('class', 'button');
-                        echo $this->formElement($form->get('publish'));
-                        ?>
-                    </div>
-                </div>
+                <?php echo $this->form()->closeTag() ?>
 
             </div>
-
-        <?php echo $this->form()->closeTag() ?>
-
-        <script language="JavaScript">
-            <!--
-            var input1 = document.getElementById('live-from');
-            var cal1 = new calendar(input1);
-            cal1.year_scroll = true;
-            cal1.time_comp = true;
-
-            var input2 = document.getElementById('expires-end');
-            var cal2 = new calendar(input2);
-            cal2.year_scroll = true;
-            cal2.time_comp = true;
-            -->
-        </script>
-    </body>
-</html>
+        </div>

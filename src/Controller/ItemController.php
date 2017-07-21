@@ -183,7 +183,7 @@ class ItemController extends AbstractActionController
                 return $this->notFoundAction();
             }
 
-            $adminNavigation = $this->adminNavigationWidget(true);
+            $adminNavigation = $this->adminNavigationWidget();
             if (null !== $adminNavigation) {
                 $this->layout()->addChild($adminNavigation, 'adminNavigation');
             }
@@ -686,6 +686,8 @@ class ItemController extends AbstractActionController
         $form->get('confirm')->setValue('Confirm delete');
 
         $this->view->form = $form;
+
+        $this->layout('layout/dialog');
         $this->view->setTemplate('boxspaced/cms-item-module/item/confirm.phtml');
 
         if (!$this->getRequest()->isPost()) {
@@ -733,6 +735,8 @@ class ItemController extends AbstractActionController
         $form->get('confirm')->setValue('Confirm update');
 
         $this->view->form = $form;
+
+        $this->layout('layout/dialog');
         $this->view->setTemplate('boxspaced/cms-item-module/item/confirm.phtml');
 
         if (!$this->getRequest()->isPost()) {
