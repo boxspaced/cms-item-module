@@ -93,7 +93,7 @@ class ItemController extends AbstractActionController
         if ($this->config['core']['has_ssl']) {
             $this->forceHttps();
         }
-        $this->view->setTerminal(true);
+        $this->layout('layout/admin');
     }
 
     /**
