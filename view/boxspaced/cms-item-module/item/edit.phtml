@@ -11,6 +11,22 @@ if ($this->preview) :
 
 endif;
 
+$script = <<<SCRIPT
+$(function(){
+
+    $(document).ready(function() {
+
+        $('[data-preview-template-id]').click(function(event) {
+            event.preventDefault();
+            var templateId = $(this).data('preview-template-id');
+            $('input[name="previewTemplateId"]').val(templateId);
+            $(this).closest('form').submit();
+        });
+    });
+});
+SCRIPT;
+$this->inlineScript()->appendScript($script);
+
 $this->headScript()->appendFile('/ckeditor/ckeditor.js');
 $this->headScript()->appendFile('/ckfinder/ckfinder.js');
 ?>
@@ -116,43 +132,58 @@ $this->headScript()->appendFile('/ckfinder/ckfinder.js');
 
                     </fieldset>
 
-                    <div class="form-group">
-                        <div class="col-md-10 col-md-offset-2">
+                    <fieldset>
+                        <legend>Submit</legend>
 
-                            <?php if (count($form->get('previewTemplateId')->getValueOptions()) > 0) : ?>
-                            <?php
-                            $form->get('previewTemplateId')->setAttribute('class', 'form-control');
-                            echo $this->formElement($form->get('previewTemplateId'));
-                            $form->get('preview')->setAttribute('class', 'btn btn-default');
-                            echo $this->formElement($form->get('preview'));
-                            ?>
-                            <?php else : ?>
-                            <?php
-                            $form->get('preview')->setAttribute('class', 'btn btn-default');
-                            echo $this->formElement($form->get('preview'));
-                            ?>
-                            <?php endif; ?>
+                        <div class="form-group">
+                            <div class="col-md-10 col-md-offset-2">
 
+                                <?php if (count($form->get('previewTemplateId')->getValueOptions())) : ?>
+
+                                <?php echo $this->formHidden($form->get('previewTemplateId')); ?>
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Preview <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <?php foreach ($form->get('previewTemplateId')->getValueOptions() as $id => $option) : ?>
+                                        <li><a data-preview-template-id="<?php echo $id ?>"><?php echo $option ?></a></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+
+                                <?php else : ?>
+
+                                <?php
+                                $form->get('preview')->setAttribute('class', 'btn btn-default');
+                                echo $this->formElement($form->get('preview'));
+                                ?>
+
+                                <?php endif; ?>
+
+                            </div>
                         </div>
-                    </div>
 
-                    <?php echo $this->adminFormElement($form->get('note')) ?>
+                        <?php echo $this->adminFormElement($form->get('note')) ?>
 
-                    <div class="form-group">
-                        <div class="col-md-10 col-md-offset-2">
+                        <div class="form-group">
+                            <div class="col-md-10 col-md-offset-2">
 
-                            <?php
-                            $form->get('save')->setAttribute('class', 'btn btn-warning');
-                            echo $this->formElement($form->get('save'));
-                            ?>
+                                <?php
+                                $form->get('save')->setAttribute('class', 'btn btn-warning');
+                                echo $this->formElement($form->get('save'));
+                                ?>
 
-                            <?php
-                            $form->get('publish')->setAttribute('class', 'btn btn-success');
-                            echo $this->formElement($form->get('publish'));
-                            ?>
+                                <?php
+                                $form->get('publish')->setAttribute('class', 'btn btn-success');
+                                echo $this->formElement($form->get('publish'));
+                                ?>
 
+                            </div>
                         </div>
-                    </div>
+
+                    </fieldset>
 
                 <?php echo $this->form()->closeTag() ?>
 
