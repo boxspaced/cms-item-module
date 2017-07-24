@@ -14,12 +14,19 @@ endif;
 $script = <<<SCRIPT
 $(function(){
 
+    function updateCkEditors() {
+        for ( instance in CKEDITOR.instances ) {
+            CKEDITOR.instances[instance].updateElement();
+        }
+    }
+
     $(document).ready(function() {
 
         $('[data-preview-template-id]').click(function(event) {
             event.preventDefault();
             var templateId = $(this).data('preview-template-id');
             $('input[name="previewTemplateId"]').val(templateId);
+            updateCkEditors();
             $(this).closest('form').submit();
         });
     });
