@@ -19,7 +19,7 @@ $this->headScript()->appendFile('/ckfinder/ckfinder.js');
             <div class="col-md-12">
 
                 <h1>Edit<?php echo ($this->titleSuffix) ? ' ' . $this->escapeHtml(strtolower($this->titleSuffix)) : '' ?>
-                <?php echo $this->escapeHtml($this->typeName) ?><small><?php echo $this->escapeHtml($this->itemName) ?></small></h1>
+                <?php echo $this->escapeHtml($this->typeName) ?> <small><?php echo $this->escapeHtml($this->itemName) ?></small></h1>
 
                 <?php
                 $form = $this->form;
@@ -121,29 +121,36 @@ $this->headScript()->appendFile('/ckfinder/ckfinder.js');
 
                             <?php if (count($form->get('previewTemplateId')->getValueOptions()) > 0) : ?>
                             <?php
-                            $form->get('preview')->setAttribute('class', 'menu-button');
-                            echo $this->formElement($form->get('preview'));
+                            $form->get('previewTemplateId')->setAttribute('class', 'form-control');
                             echo $this->formElement($form->get('previewTemplateId'));
+                            $form->get('preview')->setAttribute('class', 'btn btn-default');
+                            echo $this->formElement($form->get('preview'));
                             ?>
                             <?php else : ?>
                             <?php
-                            $form->get('preview')->setAttribute('class', 'button');
+                            $form->get('preview')->setAttribute('class', 'btn btn-default');
                             echo $this->formElement($form->get('preview'));
                             ?>
                             <?php endif; ?>
 
-                            <?php echo $this->adminFormElement($form->get('note')) ?>
+                        </div>
+                    </div>
+
+                    <?php echo $this->adminFormElement($form->get('note')) ?>
+
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-2">
 
                             <?php
-                            $form->get('save')->setAttribute('class', 'button');
+                            $form->get('save')->setAttribute('class', 'btn btn-warning');
                             echo $this->formElement($form->get('save'));
                             ?>
 
                             <?php
-                            $form->get('publish')->setAttribute('class', 'button');
+                            $form->get('publish')->setAttribute('class', 'btn btn-success');
                             echo $this->formElement($form->get('publish'));
                             ?>
-                            
+
                         </div>
                     </div>
 
