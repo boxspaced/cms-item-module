@@ -576,6 +576,10 @@ class ItemController extends AbstractActionController
                 $form->populateFromPublishingOptions($publishingOptions);
             }
 
+            if (null !== $provisionalLocation) {
+                $form->get('useProvisional')->setChecked(true);
+            }
+
             return $this->view;
         }
 

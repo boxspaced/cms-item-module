@@ -105,26 +105,29 @@ endif;
                         if (null !== $this->provisionalTo) :
                             $useProvisional = $form->get('useProvisional');
                             $useProvisional->setAttribute('onChange', 'submit_partial(this.form)');
-                            $useProvisional->setChecked(true);
                             echo $this->adminFormElement($useProvisional);
                         endif;
                         ?>
 
                         <?php if ($form->get('useProvisional')->isChecked()) : ?>
-                        <div class="form-element">
-                            <label class="lined-up optional">To</label>
-                            <div class="form-inputs line-up">
-                                <?php echo $this->escapeHtml($this->provisionalTo) ?>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">To</label>
+                            <div class="col-md-10">
+                                <p class="form-control-static">
+                                    <?php echo $this->escapeHtml($this->provisionalTo) ?>
+                                </p>
                             </div>
                         </div>
                         <?php if ($this->provisionalBeneathMenuItem) : ?>
-                        <div class="form-element">
-                            <label class="lined-up optional">Menu position</label>
-                            <div class="form-inputs line-up">
-                                <?php echo $this->escapeHtml($this->provisionalBeneathMenuItem) ?>
-                                <?php if ($this->provisionalBeneathMenuItem !== 'Top level') : ?>
-                                <-- Beneath
-                                <?php endif; ?>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Menu position</label>
+                            <div class="col-md-10">
+                                <p class="form-control-static">
+                                    <?php echo $this->escapeHtml($this->provisionalBeneathMenuItem) ?>
+                                    <?php if ($this->provisionalBeneathMenuItem !== 'Top level') : ?>
+                                    <-- Beneath
+                                    <?php endif; ?>
+                                </p>
                             </div>
                         </div>
                         <?php endif; ?>
