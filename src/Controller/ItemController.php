@@ -602,7 +602,7 @@ class ItemController extends AbstractActionController
         $publishingOptions->name = $values['name'];
         $publishingOptions->colourScheme = $values['colourScheme'];
         $publishingOptions->liveFrom = (new DateTime($values['liveFrom']))->setTime(0, 0, 0);
-        $publishingOptions->expiresEnd = (new DateTime($values['expiresEnd']))->setTime(0, 0, 0);
+        $publishingOptions->expiresEnd = (new DateTime($values['expiresEnd']))->setTime(23, 59, 59);
         $publishingOptions->teaserTemplateId = $values['teaserTemplateId'];
         $publishingOptions->templateId = $values['templateId'];
 
