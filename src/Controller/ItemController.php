@@ -183,11 +183,6 @@ class ItemController extends AbstractActionController
                 return $this->notFoundAction();
             }
 
-            $adminNavigation = $this->adminNavigationWidget();
-            if (null !== $adminNavigation) {
-                $this->layout()->addChild($adminNavigation, 'adminNavigation');
-            }
-
             $contentAdmin = $this->itemAdminWidget(
                 $publishingOptions->liveFrom,
                 $publishingOptions->expiresEnd,

@@ -32,16 +32,21 @@ $this->inlineScript()->appendScript("document.getElementById('dynname').innerHTM
 
                     </fieldset>
 
-                    <div class="form-group">
+                    <fieldset>
+                        <legend>Submit</legend>
 
-                        <div class="col-md-10 col-md-offset-2">
-                            <?php
-                            $form->get('create')->setAttribute('class', 'btn btn-primary');
-                            echo $this->formElement($form->get('create'));
-                            ?>
+                        <div class="form-group">
+
+                            <div class="col-md-10 col-md-offset-2">
+                                <?php
+                                $form->get('create')->setAttribute('class', 'btn btn-primary');
+                                echo $this->formElement($form->get('create'));
+                                ?>
+                            </div>
+
                         </div>
 
-                    </div>
+                    </fieldset>
 
                 <?php echo $this->form()->closeTag() ?>
 

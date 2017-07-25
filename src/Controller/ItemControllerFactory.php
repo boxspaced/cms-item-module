@@ -16,7 +16,7 @@ class ItemControllerFactory extends AbstractControllerFactory implements Factory
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new ItemController(
+        $controller = new ItemController(
             $container->get(ItemService::class),
             $container->get(BlockService::class),
             $container->get(WorkflowService::class),
@@ -24,6 +24,8 @@ class ItemControllerFactory extends AbstractControllerFactory implements Factory
             $container->get(Logger::class),
             $container->get('config')
         );
+
+        return $this->adminNavigationWidget($controller);
     }
 
 }
