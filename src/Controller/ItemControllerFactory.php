@@ -25,7 +25,7 @@ class ItemControllerFactory extends AbstractControllerFactory implements Factory
             $container->get('config')
         );
 
-        return $this->adminNavigationWidget($controller);
+        return $this->adminNavigationWidget($controller, $container);
     }
 
 }
