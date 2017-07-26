@@ -154,7 +154,6 @@ class ItemPublishForm extends Form
         $element->setLabel('Menu position');
         $element->setEmptyOption('Top level');
         $element->setValueOptions($this->getMenuPositionValueOptions());
-        $element->setAttribute('required', true);
         $this->add($element);
 
         $freeBlocks = new Fieldset('freeBlocks');
