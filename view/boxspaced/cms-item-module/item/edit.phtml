@@ -165,7 +165,7 @@ $this->headScript()->appendFile('/ckfinder/ckfinder.js');
                                     </button>
                                     <ul class="dropdown-menu">
                                         <?php foreach ($form->get('previewTemplateId')->getValueOptions() as $id => $option) : ?>
-                                        <li><a data-preview-template-id="<?php echo $id ?>"><?php echo $option ?></a></li>
+                                        <li><a href="#" data-preview-template-id="<?php echo $id ?>"><?php echo $option ?></a></li>
                                         <?php endforeach; ?>
                                     </ul>
                                 </div>
