@@ -169,6 +169,7 @@ endif;
                         <legend>Blocks</legend>
 
                         <?php foreach ($freeBlocks as $freeBlock) : ?>
+                        <?php $freeBlock->get('id')->setLabel($freeBlock->getLabel()); ?>
                         <?php echo $this->adminFormElement($freeBlock->get('id')); ?>
                         <?php endforeach; ?>
 
