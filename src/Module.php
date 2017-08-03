@@ -1,10 +1,6 @@
 <?php
 namespace Boxspaced\CmsItemModule;
 
-use Boxspaced\CmsItemModule\Controller\ItemController;
-use Boxspaced\CmsCoreModule\Listener\ForceHttpsListener;
-use Zend\Mvc\MvcEvent;
-
 class Module
 {
 
@@ -14,23 +10,6 @@ class Module
     public function getConfig()
     {
         return include __DIR__ . '/../config/module.config.php';
-    }
-
-    /**
-     * @param MvcEvent $event
-     * @return void
-     */
-    public function onBootstrap(MvcEvent $event)
-    {
-        $eventManager = $event->getApplication()->getEventManager();
-        $sharedEventManager = $eventManager->getSharedManager();
-
-        $sharedEventManager->attach(
-            ItemController::class,
-            MvcEvent::EVENT_DISPATCH,
-            new ForceHttpsListener(),
-            100
-        );
     }
 
 }
