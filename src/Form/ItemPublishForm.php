@@ -154,7 +154,6 @@ class ItemPublishForm extends Form
         $element->setLabel('Menu position');
         $element->setEmptyOption('Top level');
         $element->setValueOptions($this->getMenuPositionValueOptions());
-        $element->setAttribute('required', true);
         $this->add($element);
 
         $freeBlocks = new Fieldset('freeBlocks');
@@ -272,7 +271,7 @@ class ItemPublishForm extends Form
                 [
                     'name' => Validator\Regex::class,
                     'options' => [
-                        'pattern' => '/^([0-9]{2,4})-([0-1][0-9])-([0-3][0-9]) (?:([0-2][0-9]):([0-5][0-9]):([0-5][0-9]))?$/',
+                        'pattern' => '/^([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])$/',
                     ],
                 ],
             ],
@@ -284,7 +283,7 @@ class ItemPublishForm extends Form
                 [
                     'name' => Validator\Regex::class,
                     'options' => [
-                        'pattern' => '/^([0-9]{2,4})-([0-1][0-9])-([0-3][0-9]) (?:([0-2][0-9]):([0-5][0-9]):([0-5][0-9]))?$/',
+                        'pattern' => '/^([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])$/',
                     ],
                 ],
             ],
@@ -568,8 +567,8 @@ class ItemPublishForm extends Form
             }
         }
 
-        $values['liveFrom'] = ($values['liveFrom'] instanceof DateTime) ? $values['liveFrom']->format('Y-m-d H:i:s') : '';
-        $values['expiresEnd'] = ($values['expiresEnd'] instanceof DateTime) ? $values['expiresEnd']->format('Y-m-d H:i:s') : '';
+        $values['liveFrom'] = ($values['liveFrom'] instanceof DateTime) ? $values['liveFrom']->format('Y-m-d') : '';
+        $values['expiresEnd'] = ($values['expiresEnd'] instanceof DateTime) ? $values['expiresEnd']->format('Y-m-d') : '';
 
         return parent::populateValues($values);
     }

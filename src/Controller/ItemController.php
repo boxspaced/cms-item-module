@@ -93,7 +93,7 @@ class ItemController extends AbstractActionController
         if ($this->config['core']['has_ssl']) {
             $this->forceHttps();
         }
-        $this->view->setTerminal(true);
+        $this->layout('layout/admin');
     }
 
     /**
@@ -181,11 +181,6 @@ class ItemController extends AbstractActionController
 
             if (!$live && null === $this->accountService->getIdentity()) {
                 return $this->notFoundAction();
-            }
-
-            $adminNavigation = $this->adminNavigationWidget(true);
-            if (null !== $adminNavigation) {
-                $this->layout()->addChild($adminNavigation, 'adminNavigation');
             }
 
             $contentAdmin = $this->itemAdminWidget(
@@ -576,6 +571,10 @@ class ItemController extends AbstractActionController
                 $form->populateFromPublishingOptions($publishingOptions);
             }
 
+            if (null !== $provisionalLocation) {
+                $form->get('useProvisional')->setChecked(true);
+            }
+
             return $this->view;
         }
 
@@ -601,8 +600,8 @@ class ItemController extends AbstractActionController
 
         $publishingOptions->name = $values['name'];
         $publishingOptions->colourScheme = $values['colourScheme'];
-        $publishingOptions->liveFrom = new DateTime($values['liveFrom']);
-        $publishingOptions->expiresEnd = new DateTime($values['expiresEnd']);
+        $publishingOptions->liveFrom = (new DateTime($values['liveFrom']))->setTime(0, 0, 0);
+        $publishingOptions->expiresEnd = (new DateTime($values['expiresEnd']))->setTime(23, 59, 59);
         $publishingOptions->teaserTemplateId = $values['teaserTemplateId'];
         $publishingOptions->templateId = $values['templateId'];
 
@@ -686,6 +685,8 @@ class ItemController extends AbstractActionController
         $form->get('confirm')->setValue('Confirm delete');
 
         $this->view->form = $form;
+
+        $this->layout('layout/dialog');
         $this->view->setTemplate('boxspaced/cms-item-module/item/confirm.phtml');
 
         if (!$this->getRequest()->isPost()) {
@@ -733,6 +734,8 @@ class ItemController extends AbstractActionController
         $form->get('confirm')->setValue('Confirm update');
 
         $this->view->form = $form;
+
+        $this->layout('layout/dialog');
         $this->view->setTemplate('boxspaced/cms-item-module/item/confirm.phtml');
 
         if (!$this->getRequest()->isPost()) {

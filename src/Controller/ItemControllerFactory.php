@@ -8,10 +8,9 @@ use Boxspaced\CmsItemModule\Service\ItemService;
 use Boxspaced\CmsWorkflowModule\Service\WorkflowService;
 use Boxspaced\CmsAccountModule\Service\AccountService;
 use Zend\Log\Logger;
-use Boxspaced\CmsCoreModule\Controller\AbstractControllerFactory;
 use Boxspaced\CmsBlockModule\Service\BlockService;
 
-class ItemControllerFactory extends AbstractControllerFactory implements FactoryInterface
+class ItemControllerFactory implements FactoryInterface
 {
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
