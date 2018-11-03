@@ -459,6 +459,10 @@ class ItemService
     protected function getContentByMenuItem(MenuItem $menuItem)
     {
         $route = $menuItem->getRoute();
+        
+        if (!$route) {
+            return null;
+        }
 
         if (is_numeric($route->getIdentifier())) {
 
